@@ -6,7 +6,10 @@ extern Arktos::Application* Arktos::CreateApplication();
 
 int main(int argc, char** argv)
 {
-	printf("Arktos Engine");
+	Arktos::Log::Init();
+	Arktos::Log::GetCoreLogger()->warn("Initilised log!");
+	Arktos::Log::GetClientLogger()->info("Initilised log!");
+
 	auto app = Arktos::CreateApplication();
 	app->Run();
 	delete app;

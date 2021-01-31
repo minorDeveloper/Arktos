@@ -4,7 +4,7 @@
 
 namespace Arktos {
 
-	class ARKTOS_API Application
+	class Application
 	{
 	public:
 		Application();
