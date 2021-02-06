@@ -39,3 +39,4 @@
 /bin-int
 /.vs
 /build
+/extern/*
