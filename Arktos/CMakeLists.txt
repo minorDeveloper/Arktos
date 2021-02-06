@@ -41,6 +41,14 @@ if(${CMAKE_VERSION} VERSION_LESS 3.14)
   include(cmake/add_FetchContent_MakeAvailable.cmake)
 endif()
 
+# Add Corrade as a subproject
+add_subdirectory(extern/corrade EXCLUDE_FROM_ALL)
+
+# Add Magnum as a subproject, enable Sdl2Application
+set(CMAKE_PREFIX_PATH ${PROJECT_SOURCE_DIR}/extern/SDL2-2.0.10 ${CMAKE_PREFIX_PATH})
+set(WITH_SDL2APPLICATION ON)
+add_subdirectory(extern/magnum EXCLUDE_FROM_ALL)
+
 # The compiled library code is here
 add_subdirectory(src)
 
