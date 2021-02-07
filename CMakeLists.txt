@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.11...3.19)
+cmake_minimum_required(VERSION 3.14...3.19)
 
 project(Arktos)
 set(ARKTOS_BUILD_TESTING ON)

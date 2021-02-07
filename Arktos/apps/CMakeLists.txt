@@ -1,12 +1,15 @@
-find_package(Magnum REQUIRED GL Sdl2Application)
+find_package(Corrade REQUIRED Main)
+find_package(Magnum REQUIRED GL Shaders Sdl2Application)
 
 set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
 
-add_executable(app app.cpp)
+add_executable(app WIN32 app.cpp)
 target_link_libraries(app PRIVATE
+    Corrade::Main
     Magnum::Application
     Magnum::GL
-    Magnum::Magnum)
+    Magnum::Magnum
+    Magnum::Shaders)
 
 target_compile_features(app PRIVATE cxx_std_17)
 

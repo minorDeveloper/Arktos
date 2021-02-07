@@ -1,5 +1,5 @@
 
-cmake_minimum_required(VERSION 3.11...3.19)
+cmake_minimum_required(VERSION 3.14...3.19)
 
 
 # Project name and a few useful settings.
@@ -45,8 +45,13 @@ endif()
 add_subdirectory(extern/corrade EXCLUDE_FROM_ALL)
 
 # Add Magnum as a subproject, enable Sdl2Application
-set(CMAKE_PREFIX_PATH ${PROJECT_SOURCE_DIR}/extern/SDL2-2.0.10 ${CMAKE_PREFIX_PATH})
-set(WITH_SDL2APPLICATION ON)
+if(MINGW)
+    set(CMAKE_PREFIX_PATH ${PROJECT_SOURCE_DIR}/extern/SDL2-2.0.10-mingw ${CMAKE_PREFIX_PATH})
+else()
+    set(CMAKE_PREFIX_PATH ${PROJECT_SOURCE_DIR}/extern/SDL2-2.0.10-vs ${CMAKE_PREFIX_PATH})
+endif(MINGW)
+set(WITH_SDL2APPLICATION ON CACHE BOOL "" FORCE)
+message( ${WITH_SDL2APPLICATION} )
 add_subdirectory(extern/magnum EXCLUDE_FROM_ALL)
 
 # The compiled library code is here
