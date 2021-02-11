@@ -4,3 +4,6 @@
 [submodule "Arktos/extern/magnum"]
 	path = Arktos/extern/magnum
 	url = https://github.com/mosra/magnum.git
+[submodule "Utility/extern/spdlog"]
+	path = Utility/extern/spdlog
+	url = https://github.com/gabime/spdlog.git

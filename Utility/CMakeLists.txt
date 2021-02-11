@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.14...3.19)
 
 
 # Project name and a few useful settings.
-project(Core
+project(Utility
 	VERSION 0.1
 	DESCRIPTION "Arktos Project Utility Library"
 	LANGUAGES CXX)
@@ -41,8 +41,14 @@ if(${CMAKE_VERSION} VERSION_LESS 3.14)
   include(cmake/add_FetchContent_MakeAvailable.cmake)
 endif()
 
+# spdlog
+add_subdirectory(extern/spdlog)
+
 # The compiled library code is here
 add_subdirectory(src)
+
+# The executable code is here
+add_subdirectory(app)
 
 # Testing only available if this is the main app
 # Emergency override ARKTOS_BUILD_TESTING)provided as well
