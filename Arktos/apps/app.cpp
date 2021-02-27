@@ -8,6 +8,7 @@
 #include <Magnum/Platform/Sdl2Application.h>
 #include <Magnum/Shaders/VertexColor.h>
 
+
 using namespace Magnum;
 
 class MyApplication: public Platform::Application {

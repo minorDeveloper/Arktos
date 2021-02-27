@@ -41,6 +41,7 @@ if(${CMAKE_VERSION} VERSION_LESS 3.14)
   include(cmake/add_FetchContent_MakeAvailable.cmake)
 endif()
 
+set(MSVC2019_COMPATIBILITY ON)
 # Add Corrade as a subproject
 add_subdirectory(extern/corrade EXCLUDE_FROM_ALL)
 
@@ -51,7 +52,6 @@ else()
     set(CMAKE_PREFIX_PATH ${PROJECT_SOURCE_DIR}/extern/SDL2-2.0.10-vs ${CMAKE_PREFIX_PATH})
 endif(MINGW)
 set(WITH_SDL2APPLICATION ON CACHE BOOL "" FORCE)
-message( ${WITH_SDL2APPLICATION} )
 add_subdirectory(extern/magnum EXCLUDE_FROM_ALL)
 
 # The compiled library code is here

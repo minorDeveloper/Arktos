@@ -37,6 +37,7 @@
 # Directories
 /bin
 /bin-int
+/lib
 /.vs
 /.idea
 /build

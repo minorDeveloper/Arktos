@@ -3,9 +3,9 @@ cmake_minimum_required(VERSION 3.14...3.19)
 
 
 # Project name and a few useful settings.
-project(Utility
+project(Ichnea
 	VERSION 0.1
-	DESCRIPTION "Arktos Project Utility Library"
+	DESCRIPTION "Arktos Project Core/Utility Library"
 	LANGUAGES CXX)
 
 # Only do these if this is the main project, and not if it is included through add_subdirectory
@@ -47,11 +47,9 @@ add_subdirectory(extern/spdlog)
 # The compiled library code is here
 add_subdirectory(src)
 
-# The executable code is here
-add_subdirectory(app)
 
 # Testing only available if this is the main app
-# Emergency override ARKTOS_BUILD_TESTING)provided as well
+# Emergency override ARKTOS_BUILD_TESTING provided as well
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR ARKTOS_BUILD_TESTING)
    AND BUILD_TESTING)
   add_subdirectory(tests)
