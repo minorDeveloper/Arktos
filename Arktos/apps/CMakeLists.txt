@@ -1,24 +1,17 @@
 find_package(Corrade REQUIRED Main)
 find_package(Magnum REQUIRED GL Shaders Sdl2Application)
+find_package(Ichnea 0.1 REQUIRED)
 
 set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
 
 add_executable(Arktos WIN32 app.cpp)
 
-target_include_directories(${PROJECT_NAME} PUBLIC
-        "${CMAKE_CURRENT_SOURCE_DIR}/../Ichnea/src;"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../Ichnea/extern/spdlog/include"
-        )
-	
-add_dependencies(Arktos Ichnea)
 target_link_libraries(Arktos PRIVATE
     Corrade::Main
     Magnum::Application
     Magnum::GL
     Magnum::Magnum
     Magnum::Shaders
-    Ichnea)
-
-
+    Ichnea::Ichnea)
 
 target_compile_features(Arktos PRIVATE cxx_std_17)
