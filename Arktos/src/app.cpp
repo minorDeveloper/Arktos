@@ -8,6 +8,8 @@
 #include <Magnum/Platform/Sdl2Application.h>
 #include <Magnum/Shaders/VertexColor.h>
 
+#include <stdio.h>
+#include "Arktos/Log.h"
 
 using namespace Magnum;
 
@@ -26,7 +28,9 @@ BaseApplication::BaseApplication(const Arguments& arguments):
     Platform::Application{ arguments, Configuration{}.setTitle("Magnum Triangle Example") }
 {
     using namespace Math::Literals;
-
+    Arktos::Log::Init();
+    Arktos::Log::GetCoreLogger()->warn("Initilised log!");
+    Arktos::Log::GetClientLogger()->info("Initilised log!");
     struct TriangleVertex {
         Vector2 position;
         Color3 color;

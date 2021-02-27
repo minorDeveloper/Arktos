@@ -54,11 +54,13 @@ endif(MINGW)
 set(WITH_SDL2APPLICATION ON CACHE BOOL "" FORCE)
 add_subdirectory(extern/magnum EXCLUDE_FROM_ALL)
 
+add_subdirectory(extern/spdlog)
+find_package(spdlog)
+
+
 # The compiled library code is here
 add_subdirectory(src)
 
-# The executable code is here
-add_subdirectory(apps)
 
 # Testing only available if this is the main app
 # Emergency override ARKTOS_BUILD_TESTING)provided as well
