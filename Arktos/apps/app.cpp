@@ -11,9 +11,9 @@
 
 using namespace Magnum;
 
-class MyApplication: public Platform::Application {
+class BaseApplication: public Platform::Application {
     public:
-        explicit MyApplication(const Arguments& arguments);
+        explicit BaseApplication(const Arguments& arguments);
 
     private:
         void drawEvent() override;
@@ -22,7 +22,7 @@ class MyApplication: public Platform::Application {
         Shaders::VertexColor2D _shader;
 };
 
-MyApplication::MyApplication(const Arguments& arguments):
+BaseApplication::BaseApplication(const Arguments& arguments):
     Platform::Application{ arguments, Configuration{}.setTitle("Magnum Triangle Example") }
 {
     using namespace Math::Literals;
@@ -46,7 +46,7 @@ MyApplication::MyApplication(const Arguments& arguments):
             Shaders::VertexColor2D::Color3{});
 }
 
-void MyApplication::drawEvent() {
+void BaseApplication::drawEvent() {
     GL::defaultFramebuffer.clear(GL::FramebufferClear::Color);
 
     _shader.draw(_mesh);
@@ -54,4 +54,4 @@ void MyApplication::drawEvent() {
     swapBuffers();
 }
 
-MAGNUM_APPLICATION_MAIN(MyApplication)
+MAGNUM_APPLICATION_MAIN(BaseApplication)
