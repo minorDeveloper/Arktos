@@ -7,3 +7,9 @@
 [submodule "Arktos/extern/spdlog"]
 	path = Arktos/extern/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "Arktos/extern/magnum-integration"]
+	path = Arktos/extern/magnum-integration
+	url = https://github.com/mosra/magnum-integration.git
+[submodule "Arktos/extern/imgui"]
+	path = Arktos/extern/imgui
+	url = https://github.com/ocornut/imgui.git
