@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 3.14...3.19)
 # Project name and a few useful settings.
 project(Arktos
 	VERSION 0.1
-	DESCRIPTION "Orbital manouever optimiser"
-	LANGUAGES CXX)
+	DESCRIPTION "Orbital manoeuvre optimiser"
+	LANGUAGES CUDA CXX)
 
 # Only do these if this is the main project, and not if it is included through add_subdirectory
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
@@ -53,6 +53,10 @@ else()
 endif(MINGW)
 set(WITH_SDL2APPLICATION ON CACHE BOOL "" FORCE)
 add_subdirectory(extern/magnum EXCLUDE_FROM_ALL)
+
+set(IMGUI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/extern/imgui)
+set(WITH_IMGUI ON CACHE BOOL "" FORCE) # enable what you need
+add_subdirectory(extern/magnum-integration EXCLUDE_FROM_ALL)
 
 add_subdirectory(extern/spdlog)
 find_package(spdlog)
