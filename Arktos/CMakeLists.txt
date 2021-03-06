@@ -61,6 +61,7 @@ add_subdirectory(extern/magnum-integration EXCLUDE_FROM_ALL)
 add_subdirectory(extern/spdlog)
 find_package(spdlog)
 
+add_subdirectory(extern/sol2/single)
 
 # The compiled library code is here
 add_subdirectory(src)
