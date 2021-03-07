@@ -11,6 +11,7 @@
 #include "Arktos/Log.h"
 
 #define SOL_ALL_SAFETIES_ON 1
+#include <lua/lua.hpp>
 #include <sol/sol.hpp>
 
 
@@ -49,8 +50,6 @@ BaseApplication::BaseApplication(const Arguments &arguments) :
         Platform::Application{arguments, Configuration{}.setTitle("Magnum Triangle Example").setWindowFlags(Configuration::WindowFlag::Resizable)} {
     using namespace Math::Literals;
     Arktos::Log::Init();
-
-
 
     _imgui = ImGuiIntegration::Context(Vector2{windowSize()}/dpiScaling(),
                                        windowSize(), framebufferSize());

@@ -19,6 +19,14 @@ target_link_libraries(Arktos PRIVATE
     Magnum::Magnum
     Magnum::Shaders
     MagnumIntegration::ImGui
-    spdlog)
+    spdlog
+    lua)
+
+
+target_include_directories(
+        Arktos
+        PRIVATE ${EXTERNALS_DIR}
+        PRIVATE ${LUA_DIR} # as of sol2 3.2.2, lua.hpp must be accesible through root include '#include <lua.hpp>'
+)
 
 target_compile_features(Arktos PRIVATE cxx_std_17)
