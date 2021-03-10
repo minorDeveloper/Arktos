@@ -47,8 +47,10 @@ add_subdirectory(extern/corrade EXCLUDE_FROM_ALL)
 
 # Add Magnum as a subproject, enable Sdl2Application
 if(MINGW)
+    message("MINGWadded SDL to the path")
     set(CMAKE_PREFIX_PATH ${PROJECT_SOURCE_DIR}/extern/SDL2-2.0.10-mingw ${CMAKE_PREFIX_PATH})
 else()
+    message("MSVC: added SDL to the path")
     set(CMAKE_PREFIX_PATH ${PROJECT_SOURCE_DIR}/extern/SDL2-2.0.10-vs ${CMAKE_PREFIX_PATH})
 endif(MINGW)
 set(WITH_SDL2APPLICATION ON CACHE BOOL "" FORCE)
@@ -60,7 +62,6 @@ add_subdirectory(extern/magnum-integration EXCLUDE_FROM_ALL)
 
 add_subdirectory(extern/spdlog)
 find_package(spdlog)
-
 
 SET (EXTERNALS_DIR "${PROJECT_SOURCE_DIR}/extern/lua-integration")
 SET (LUA_DIR "${EXTERNALS_DIR}/lua")
