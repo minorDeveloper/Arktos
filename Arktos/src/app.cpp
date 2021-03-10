@@ -82,7 +82,7 @@ BaseApplication::BaseApplication(const Arguments &arguments) :
 }
 
 void BaseApplication::drawEvent() {
-    GL::defaultFramebuffer.clear(GL::FramebufferClear::Color);
+    GL::defaultFramebuffer.clear(GL::FramebufferClear::Color | GL::FramebufferClear::Depth);
 
     _imgui.newFrame();
 
@@ -107,6 +107,7 @@ void BaseApplication::drawEvent() {
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
                     1000.0/Double(ImGui::GetIO().Framerate), Double(ImGui::GetIO().Framerate));
     }
+
 
     /* 2. Show another simple window, now using an explicit Begin/End pair */
     if(_showAnotherWindow) {
