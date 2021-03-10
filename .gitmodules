@@ -16,6 +16,3 @@
 [submodule "Arktos/extern/sol2"]
 	path = Arktos/extern/sol2
 	url = https://github.com/ThePhD/sol2.git
-[submodule "Arktos/extern/luajit-2.0"]
-	path = Arktos/extern/luajit-2.0
-	url = https://luajit.org/git/luajit-2.0.git
