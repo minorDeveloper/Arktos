@@ -20,7 +20,8 @@ jobs:
             triplet: x64-osx
     env:
       # Indicates the CMake build directory where project files and binaries are being produced.
-      CMAKE_BUILD_DIR: ${{ github.workspace }}/
+      CMAKE_SOURCE_DIR: ${{ github.workspace }}/
+      CMAKE_BUILD_DIR: ${{ github.workspace }}/build
 
     steps:
       - uses: actions/checkout@v2
@@ -44,12 +45,12 @@ jobs:
       # Run CMake to generate Ninja project files, using the vcpkg's toolchain file to resolve and install the dependencies as specified in vcpkg.json.
       - name: Generate project files
         run: |
-          cmake build "${{ env.CMAKE_BUILD_DIR }}"
+          cmake build "${{ env.CMAKE_SOURCE_DIR }}"
       
       # Build the whole project.
       - name: Build
         run: |
-          cmake --build 
+          cmake --build "${{ env.CMAKE_BUILD_DIR }}"
       - name: Show content of workspace at its completion
         run: find $RUNNER_WORKSPACE
         shell: bash
