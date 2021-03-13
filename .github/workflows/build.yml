@@ -45,7 +45,7 @@ jobs:
       # Run CMake to generate Ninja project files, using the vcpkg's toolchain file to resolve and install the dependencies as specified in vcpkg.json.
       - name: Generate project files
         run: |
-          cmake build "${{ env.CMAKE_SOURCE_DIR }}"
+          cmake build "${{ env.CMAKE_SOURCE_DIR }}" -DCMAKE_PREFIX_PATH="${{ env.CMAKE_SOURCE_DIR }}/Arktos/extern/SDL2-2.0.10-vs" -DWITH_SDL2APPLICATION=ON
       
       # Build the whole project.
       - name: Build
@@ -54,3 +54,5 @@ jobs:
       - name: Show content of workspace at its completion
         run: find $RUNNER_WORKSPACE
         shell: bash
+        
+        
