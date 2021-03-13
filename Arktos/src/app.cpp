@@ -1,12 +1,12 @@
 
-#include <Magnum/GL/DefaultFramebuffer.h>
-#include <Magnum/Platform/Sdl2Application.h>
 #include <Magnum/GL/Buffer.h>
+#include <Magnum/GL/DefaultFramebuffer.h>
 #include <Magnum/GL/Mesh.h>
 #include <Magnum/GL/Renderer.h>
-#include <Magnum/Math/Color.h>
-#include <Magnum/Shaders/VertexColor.h>
 #include <Magnum/ImGuiIntegration/Context.hpp>
+#include <Magnum/Math/Color.h>
+#include <Magnum/Platform/Sdl2Application.h>
+#include <Magnum/Shaders/VertexColor.h>
 
 #include "Arktos/Log.h"
 
@@ -20,7 +20,7 @@ using namespace Math::Literals;
 
 class BaseApplication : public Platform::Application {
 public:
-    explicit BaseApplication(const Arguments &arguments);
+    explicit BaseApplication(const Arguments& arguments);
 
     void drawEvent() override;
 
@@ -34,6 +34,7 @@ public:
     void mouseMoveEvent(MouseMoveEvent& event) override;
     void mouseScrollEvent(MouseScrollEvent& event) override;
     void textInputEvent(TextInputEvent& event) override;
+
 private:
     ImGuiIntegration::Context _imgui{NoCreate};
 
@@ -46,12 +47,11 @@ private:
     Shaders::VertexColor2D _shader;
 };
 
-BaseApplication::BaseApplication(const Arguments &arguments) :
-        Platform::Application{arguments, Configuration{}.setTitle("Magnum Triangle Example").setWindowFlags(Configuration::WindowFlag::Resizable)} {
+BaseApplication::BaseApplication(const Arguments& arguments) : Platform::Application{arguments, Configuration{}.setTitle("Magnum Triangle Example").setWindowFlags(Configuration::WindowFlag::Resizable)} {
     using namespace Math::Literals;
     Arktos::Log::Init();
 
-    _imgui = ImGuiIntegration::Context(Vector2{windowSize()}/dpiScaling(),
+    _imgui = ImGuiIntegration::Context(Vector2{windowSize()} / dpiScaling(),
                                        windowSize(), framebufferSize());
 
     /* Set up proper blending to be used by ImGui. There's a great chance
@@ -67,9 +67,9 @@ BaseApplication::BaseApplication(const Arguments &arguments) :
         Color3 color;
     };
     const TriangleVertex data[]{
-            {{-0.5f, -0.5f}, 0xff0000_rgbf},    /* Left vertex, red color */
-            {{0.5f,  -0.5f}, 0x00ff00_rgbf},    /* Right vertex, green color */
-            {{0.0f,  0.5f},  0x0000ff_rgbf}     /* Top vertex, blue color */
+            {{-0.5f, -0.5f}, 0xff0000_rgbf}, /* Left vertex, red color */
+            {{0.5f, -0.5f}, 0x00ff00_rgbf},  /* Right vertex, green color */
+            {{0.0f, 0.5f}, 0x0000ff_rgbf}    /* Top vertex, blue color */
     };
 
     GL::Buffer buffer;
@@ -87,9 +87,9 @@ void BaseApplication::drawEvent() {
     _imgui.newFrame();
 
     /* Enable text input, if needed */
-    if(ImGui::GetIO().WantTextInput && !isTextInputActive())
+    if (ImGui::GetIO().WantTextInput && !isTextInputActive())
         startTextInput();
-    else if(!ImGui::GetIO().WantTextInput && isTextInputActive())
+    else if (!ImGui::GetIO().WantTextInput && isTextInputActive())
         stopTextInput();
 
     /* 1. Show a simple window.
@@ -98,19 +98,19 @@ void BaseApplication::drawEvent() {
     {
         ImGui::Text("Hello, world!");
         ImGui::SliderFloat("Float", &_floatValue, 0.0f, 1.0f);
-        if(ImGui::ColorEdit3("Clear Color", _clearColor.data()))
+        if (ImGui::ColorEdit3("Clear Color", _clearColor.data()))
             GL::Renderer::setClearColor(_clearColor);
-        if(ImGui::Button("Test Window"))
+        if (ImGui::Button("Test Window"))
             _showDemoWindow ^= true;
-        if(ImGui::Button("Another Window"))
+        if (ImGui::Button("Another Window"))
             _showAnotherWindow ^= true;
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
-                    1000.0/Double(ImGui::GetIO().Framerate), Double(ImGui::GetIO().Framerate));
+                    1000.0 / Double(ImGui::GetIO().Framerate), Double(ImGui::GetIO().Framerate));
     }
 
 
     /* 2. Show another simple window, now using an explicit Begin/End pair */
-    if(_showAnotherWindow) {
+    if (_showAnotherWindow) {
         ImGui::SetNextWindowSize(ImVec2(500, 100), ImGuiCond_FirstUseEver);
         ImGui::Begin("Another Window", &_showAnotherWindow);
         ImGui::Text("Hello");
@@ -119,7 +119,7 @@ void BaseApplication::drawEvent() {
 
     /* 3. Show the ImGui demo window. Most of the sample code is in
        ImGui::ShowDemoWindow() */
-    if(_showDemoWindow) {
+    if (_showDemoWindow) {
         ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
         ImGui::ShowDemoWindow();
     }
@@ -145,7 +145,6 @@ void BaseApplication::drawEvent() {
     GL::Renderer::disable(GL::Renderer::Feature::Blending);
 
 
-
     swapBuffers();
     redraw();
 }
@@ -153,32 +152,32 @@ void BaseApplication::drawEvent() {
 void BaseApplication::viewportEvent(ViewportEvent& event) {
     GL::defaultFramebuffer.setViewport({{}, event.framebufferSize()});
 
-    _imgui.relayout(Vector2{event.windowSize()}/event.dpiScaling(),
+    _imgui.relayout(Vector2{event.windowSize()} / event.dpiScaling(),
                     event.windowSize(), event.framebufferSize());
 }
 
 void BaseApplication::keyPressEvent(KeyEvent& event) {
-    if(_imgui.handleKeyPressEvent(event)) return;
+    if (_imgui.handleKeyPressEvent(event)) return;
 }
 
 void BaseApplication::keyReleaseEvent(KeyEvent& event) {
-    if(_imgui.handleKeyReleaseEvent(event)) return;
+    if (_imgui.handleKeyReleaseEvent(event)) return;
 }
 
 void BaseApplication::mousePressEvent(MouseEvent& event) {
-    if(_imgui.handleMousePressEvent(event)) return;
+    if (_imgui.handleMousePressEvent(event)) return;
 }
 
 void BaseApplication::mouseReleaseEvent(MouseEvent& event) {
-    if(_imgui.handleMouseReleaseEvent(event)) return;
+    if (_imgui.handleMouseReleaseEvent(event)) return;
 }
 
 void BaseApplication::mouseMoveEvent(MouseMoveEvent& event) {
-    if(_imgui.handleMouseMoveEvent(event)) return;
+    if (_imgui.handleMouseMoveEvent(event)) return;
 }
 
 void BaseApplication::mouseScrollEvent(MouseScrollEvent& event) {
-    if(_imgui.handleMouseScrollEvent(event)) {
+    if (_imgui.handleMouseScrollEvent(event)) {
         /* Prevent scrolling the page */
         event.setAccepted();
         return;
@@ -186,7 +185,7 @@ void BaseApplication::mouseScrollEvent(MouseScrollEvent& event) {
 }
 
 void BaseApplication::textInputEvent(TextInputEvent& event) {
-    if(_imgui.handleTextInputEvent(event)) return;
+    if (_imgui.handleTextInputEvent(event)) return;
 }
 
 MAGNUM_APPLICATION_MAIN(BaseApplication)

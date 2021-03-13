@@ -9,7 +9,9 @@ add_executable(Arktos WIN32
         app.cpp
         Arktos/Core.h
         Arktos/Log.cpp
-        Arktos/Log.h)
+        Arktos/Log.h
+        Arktos/Physics/Nbody.cpp
+        Arktos/Physics/Nbody.h Arktos/Physics/System.cpp Arktos/Physics/System.h Arktos/Maths/Vec.cpp Arktos/Maths/Vec.h)
 
 target_link_libraries(Arktos PRIVATE
     Corrade::Main
