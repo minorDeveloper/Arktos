@@ -5,15 +5,29 @@ find_package(spdlog)
 
 set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
 
-add_executable(Arktos WIN32
-        app.cpp
-        Arktos/Core.h
-        Arktos/Log.cpp
-        Arktos/Log.h
-        Arktos/Physics/Nbody.cpp
-        Arktos/Physics/Nbody.h Arktos/Physics/System.cpp Arktos/Physics/System.h Arktos/Maths/Vec.cpp Arktos/Maths/Vec.h)
+set(HEADER_LIST 
+    "${Arktos_SOURCE_DIR}/include/Arktos/Core.h"
+    "${Arktos_SOURCE_DIR}/include/Arktos/Log.h"
+    "${Arktos_SOURCE_DIR}/include/Arktos/Physics/Nbody.h"
+    "${Arktos_SOURCE_DIR}/include/Arktos/Maths/Vec.h")
 
-target_link_libraries(Arktos PRIVATE
+set(SOURCE_LIST
+    "${Arktos_SOURCE_DIR}/src/Arktos/Log.cpp"
+    "${Arktos_SOURCE_DIR}/src/Arktos/Physics/Nbody.cpp"
+    "${Arktos_SOURCE_DIR}/src/Arktos/Physics/System.cpp"
+    "${Arktos_SOURCE_DIR}/src/Arktos/Maths/Vec.cpp")
+
+add_library(Arktos_Lib STATIC ${HEADER_LIST} ${SOURCE_LIST})
+
+target_include_directories(
+        Arktos_Lib
+        PRIVATE ${EXTERNALS_DIR}
+        PRIVATE ${LUA_DIR}
+)
+
+target_include_directories(Arktos_Lib PUBLIC ../include)
+
+target_link_libraries(Arktos_Lib PUBLIC
     Corrade::Main
     Magnum::Application
     Magnum::GL
@@ -23,10 +37,5 @@ target_link_libraries(Arktos PRIVATE
     spdlog
     lua)
 
-target_include_directories(
-        Arktos
-        PRIVATE ${EXTERNALS_DIR}
-        PRIVATE ${LUA_DIR}
-)
 
-target_compile_features(Arktos PRIVATE cxx_std_17)
+target_compile_features(Arktos_Lib PRIVATE cxx_std_17)

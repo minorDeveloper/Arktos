@@ -1,6 +1,6 @@
 
 
-#include "Vec.h"
+#include "Arktos/Maths/Vec.h"
 
 namespace Arktos::Maths {
 

@@ -1,30 +1,20 @@
 
-cmake_minimum_required(VERSION 3.14...3.19)
+cmake_minimum_required(VERSION 3.17)
 
 
 # Project name and a few useful settings.
 project(Arktos
 	VERSION 0.1
-	DESCRIPTION "Orbital manoeuvre optimiser"
+	DESCRIPTION "Orbital Manoeuvre Optimiser"
 	LANGUAGES CXX)
 
 # Only do these if this is the main project, and not if it is included through add_subdirectory
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-
-  # Optionally set things like CMAKE_CXX_STANDARD, CMAKE_POSITION_INDEPENDENT_CODE here
-
-  # Let's ensure -std=c++xx instead of -std=g++xx
   set(CMAKE_CXX_EXTENSIONS OFF)
 
   # Let's nicely support folders in IDEs
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
-  # Testing only available if this is the main app
-  # Note this needs to be done in the main CMakeLists
-  # since it calls enable_testing, which must be in the
-  # main CMakeLists.
   include(CTest)
-
   # Docs only available if this is the main app
   find_package(Doxygen)
   if(Doxygen_FOUND)
@@ -36,10 +26,6 @@ endif()
 
 # FetchContent added in CMake 3.11, downloads during the configure step
 include(FetchContent)
-# FetchContent_MakeAvailable was not added until CMake 3.14; use our shim
-if(${CMAKE_VERSION} VERSION_LESS 3.14)
-  include(cmake/add_FetchContent_MakeAvailable.cmake)
-endif()
 
 set(MSVC2019_COMPATIBILITY ON)
 # Add Corrade as a subproject
@@ -47,13 +33,13 @@ add_subdirectory(extern/corrade EXCLUDE_FROM_ALL)
 
 # Add Magnum as a subproject, enable Sdl2Application
 if(MINGW)
-    message("MINGWadded SDL to the path")
+    message("MINGW: added SDL to the path")
     set(CMAKE_PREFIX_PATH ${PROJECT_SOURCE_DIR}/extern/SDL2-2.0.10-mingw ${CMAKE_PREFIX_PATH})
 else()
     message("MSVC: added SDL to the path")
     set(CMAKE_PREFIX_PATH ${PROJECT_SOURCE_DIR}/extern/SDL2-2.0.10-vs ${CMAKE_PREFIX_PATH})
-    set(SDL2_LIBRARY ${PROJECT_SOURCE_DIR}/extern/SDL2-2.0.10-vs/lib/x64/SDL2.lib)
 endif(MINGW)
+
 set(WITH_SDL2APPLICATION ON CACHE BOOL "" FORCE)
 add_subdirectory(extern/magnum EXCLUDE_FROM_ALL)
 
@@ -64,52 +50,53 @@ add_subdirectory(extern/magnum-integration EXCLUDE_FROM_ALL)
 add_subdirectory(extern/spdlog)
 find_package(spdlog)
 
-SET (EXTERNALS_DIR "${PROJECT_SOURCE_DIR}/extern/lua-integration")
-SET (LUA_DIR "${EXTERNALS_DIR}/lua")
+SET (LUA_EXTERNALS_DIR "${PROJECT_SOURCE_DIR}/extern/lua-integration")
+SET (LUA_DIR "${LUA_EXTERNALS_DIR}/lua")
 SET (SOL2_DIR "${EXTERNALS_DIR}/sol")
 
-# lua lib
+# Lua lib
 add_library(
-        lua STATIC
-        ${LUA_DIR}/lapi.c
-        ${LUA_DIR}/lauxlib.c
-        ${LUA_DIR}/lbaselib.c
-        ${LUA_DIR}/lcode.c
-        ${LUA_DIR}/lcorolib.c
-        ${LUA_DIR}/lctype.c
-        ${LUA_DIR}/ldblib.c
-        ${LUA_DIR}/ldebug.c
-        ${LUA_DIR}/ldo.c
-        ${LUA_DIR}/ldump.c
-        ${LUA_DIR}/lfunc.c
-        ${LUA_DIR}/lgc.c
-        ${LUA_DIR}/linit.c
-        ${LUA_DIR}/liolib.c
-        ${LUA_DIR}/llex.c
-        ${LUA_DIR}/lmathlib.c
-        ${LUA_DIR}/lmem.c
-        ${LUA_DIR}/loadlib.c
-        ${LUA_DIR}/lobject.c
-        ${LUA_DIR}/lopcodes.c
-        ${LUA_DIR}/loslib.c
-        ${LUA_DIR}/lparser.c
-        ${LUA_DIR}/lstate.c
-        ${LUA_DIR}/lstring.c
-        ${LUA_DIR}/lstrlib.c
-        ${LUA_DIR}/ltable.c
-        ${LUA_DIR}/ltablib.c
-        ${LUA_DIR}/ltm.c
-        ${LUA_DIR}/lua.c
-        ${LUA_DIR}/lundump.c
-        ${LUA_DIR}/lutf8lib.c
-        ${LUA_DIR}/lvm.c
-        ${LUA_DIR}/lzio.c
-)
-
+    lua STATIC
+    ${LUA_DIR}/lapi.c
+    ${LUA_DIR}/lauxlib.c
+    ${LUA_DIR}/lbaselib.c
+    ${LUA_DIR}/lcode.c
+    ${LUA_DIR}/lcorolib.c
+    ${LUA_DIR}/lctype.c
+    ${LUA_DIR}/ldblib.c
+    ${LUA_DIR}/ldebug.c
+    ${LUA_DIR}/ldo.c
+    ${LUA_DIR}/ldump.c
+    ${LUA_DIR}/lfunc.c
+    ${LUA_DIR}/lgc.c
+    ${LUA_DIR}/linit.c
+    ${LUA_DIR}/liolib.c
+    ${LUA_DIR}/llex.c
+    ${LUA_DIR}/lmathlib.c
+    ${LUA_DIR}/lmem.c
+    ${LUA_DIR}/loadlib.c
+    ${LUA_DIR}/lobject.c
+    ${LUA_DIR}/lopcodes.c
+    ${LUA_DIR}/loslib.c
+    ${LUA_DIR}/lparser.c
+    ${LUA_DIR}/lstate.c
+    ${LUA_DIR}/lstring.c
+    ${LUA_DIR}/lstrlib.c
+    ${LUA_DIR}/ltable.c
+    ${LUA_DIR}/ltablib.c
+    ${LUA_DIR}/ltm.c
+    ${LUA_DIR}/lua.c
+    ${LUA_DIR}/lundump.c
+    ${LUA_DIR}/lutf8lib.c
+    ${LUA_DIR}/lvm.c
+    ${LUA_DIR}/lzio.c)
 
 
 # The compiled library code is here
 add_subdirectory(src)
+
+# Final application is here
+add_subdirectory(apps)
 
 
 # Testing only available if this is the main app
