@@ -23,7 +23,7 @@ add_library(Arktos_Lib STATIC ${HEADER_LIST} ${SOURCE_LIST})
 
 target_include_directories(
         Arktos_Lib
-        PUBLIC ${EXTERNALS_DIR}
+        PUBLIC ${LUA_EXTERNALS_DIR}
         PUBLIC ${LUA_DIR}
 )
 

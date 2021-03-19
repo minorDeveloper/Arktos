@@ -11,38 +11,39 @@
 
 #include "Arktos/Log.h"
 
-//#define SOL_ALL_SAFETIES_ON 1
-//#include <lua/lua.hpp>
-//#include <sol/sol.hpp>
+#include <spdlog/spdlog.h>
+
 using namespace Magnum;
 using namespace Math::Literals;
 
+namespace Arktos {
+    class BaseApplication : public Magnum::Platform::Application {
+    public:
+        explicit BaseApplication(const Arguments& arguments);
 
-class BaseApplication : public Magnum::Platform::Application {
-public:
-    explicit BaseApplication(const Arguments& arguments);
+        void drawEvent() override;
 
-    void drawEvent() override;
+        void viewportEvent(ViewportEvent& event) override;
 
-    void viewportEvent(ViewportEvent& event) override;
+        void keyPressEvent(KeyEvent& event) override;
+        void keyReleaseEvent(KeyEvent& event) override;
 
-    void keyPressEvent(KeyEvent& event) override;
-    void keyReleaseEvent(KeyEvent& event) override;
+        void mousePressEvent(MouseEvent& event) override;
+        void mouseReleaseEvent(MouseEvent& event) override;
+        void mouseMoveEvent(MouseMoveEvent& event) override;
+        void mouseScrollEvent(MouseScrollEvent& event) override;
 
-    void mousePressEvent(MouseEvent& event) override;
-    void mouseReleaseEvent(MouseEvent& event) override;
-    void mouseMoveEvent(MouseMoveEvent& event) override;
-    void mouseScrollEvent(MouseScrollEvent& event) override;
-    void textInputEvent(TextInputEvent& event) override;
+        void textInputEvent(TextInputEvent& event) override;
 
-private:
-    Magnum::ImGuiIntegration::Context _imgui{Magnum::NoCreate};
+    private:
+        Magnum::ImGuiIntegration::Context _imgui{Magnum::NoCreate};
 
-    bool _showDemoWindow = true;
-    bool _showAnotherWindow = false;
-    Color4 _clearColor = 0x72909aff_rgbaf;
-    Magnum::Float _floatValue = 0.0f;
+        bool _showDemoWindow = true;
+        bool _showAnotherWindow = false;
+        Color4 _clearColor = 0x72909aff_rgbaf;
+        Magnum::Float _floatValue = 0.0f;
 
-    Magnum::GL::Mesh _mesh;
-    Magnum::Shaders::VertexColor2D _shader;
-};
+        Magnum::GL::Mesh _mesh;
+        Magnum::Shaders::VertexColor2D _shader;
+    };
+}

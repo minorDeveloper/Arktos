@@ -3,144 +3,149 @@
 using namespace Magnum;
 using namespace Math::Literals;
 
+namespace Arktos {
+    BaseApplication::BaseApplication(const Arguments& arguments) : Platform::Application{arguments, Configuration{}.setTitle("Magnum Triangle Example").setWindowFlags(Configuration::WindowFlag::Resizable)} {
+        using namespace Math::Literals;
 
-BaseApplication::BaseApplication(const Arguments& arguments) : Platform::Application{arguments, Configuration{}.setTitle("Magnum Triangle Example").setWindowFlags(Configuration::WindowFlag::Resizable)} {
-    using namespace Math::Literals;
-    Arktos::Log::Init();
+        Arktos::Log::Init();
 
-    _imgui = ImGuiIntegration::Context(Vector2{windowSize()} / dpiScaling(),
-                                       windowSize(), framebufferSize());
+        CORE_TRACE("Hello this is the core logger");
+        CORE_WARN("Hello this is a warning");
 
-    /* Set up proper blending to be used by ImGui. There's a great chance
-       you'll need this exact behavior for the rest of your scene. If not, set
-       this only for the drawFrame() call. */
-    GL::Renderer::setBlendEquation(GL::Renderer::BlendEquation::Add,
-                                   GL::Renderer::BlendEquation::Add);
-    GL::Renderer::setBlendFunction(GL::Renderer::BlendFunction::SourceAlpha,
-                                   GL::Renderer::BlendFunction::OneMinusSourceAlpha);
+        _imgui = ImGuiIntegration::Context(Vector2{windowSize()} / dpiScaling(),
+                                           windowSize(), framebufferSize());
 
-    struct TriangleVertex {
-        Vector2 position;
-        Color3 color;
-    };
-    const TriangleVertex data[]{
-            {{-0.5f, -0.5f}, 0xff0000_rgbf}, /* Left vertex, red color */
-            {{0.5f, -0.5f}, 0x00ff00_rgbf},  /* Right vertex, green color */
-            {{0.0f, 0.5f}, 0x0000ff_rgbf}    /* Top vertex, blue color */
-    };
+        /* Set up proper blending to be used by ImGui. There's a great chance
+   you'll need this exact behavior for the rest of your scene. If not, set
+   this only for the drawFrame() call. */
+        GL::Renderer::setBlendEquation(GL::Renderer::BlendEquation::Add,
+                                       GL::Renderer::BlendEquation::Add);
+        GL::Renderer::setBlendFunction(GL::Renderer::BlendFunction::SourceAlpha,
+                                       GL::Renderer::BlendFunction::OneMinusSourceAlpha);
 
-    GL::Buffer buffer;
-    buffer.setData(data);
+        struct TriangleVertex {
+            Vector2 position;
+            Color3 color;
+        };
+        const TriangleVertex data[]{
+                {{-0.5f, -0.5f}, 0xff0000_rgbf}, /* Left vertex, red color */
+                {{0.5f, -0.5f}, 0x00ff00_rgbf},  /* Right vertex, green color */
+                {{0.0f, 0.5f}, 0x0000ff_rgbf}    /* Top vertex, blue color */
+        };
 
-    _mesh.setCount(3)
-            .addVertexBuffer(std::move(buffer), 0,
-                             Shaders::VertexColor2D::Position{},
-                             Shaders::VertexColor2D::Color3{});
-}
+        GL::Buffer buffer;
+        buffer.setData(data);
 
-void BaseApplication::drawEvent() {
-    GL::defaultFramebuffer.clear(GL::FramebufferClear::Color | GL::FramebufferClear::Depth);
-
-    _imgui.newFrame();
-
-    /* Enable text input, if needed */
-    if (ImGui::GetIO().WantTextInput && !isTextInputActive())
-        startTextInput();
-    else if (!ImGui::GetIO().WantTextInput && isTextInputActive())
-        stopTextInput();
-
-    /* 1. Show a simple window.
-       Tip: if we don't call ImGui::Begin()/ImGui::End() the widgets appear in
-       a window called "Debug" automatically */
-    {
-        ImGui::Text("Hello, world!");
-        ImGui::SliderFloat("Float", &_floatValue, 0.0f, 1.0f);
-        if (ImGui::ColorEdit3("Clear Color", _clearColor.data()))
-            GL::Renderer::setClearColor(_clearColor);
-        if (ImGui::Button("Test Window"))
-            _showDemoWindow ^= true;
-        if (ImGui::Button("Another Window"))
-            _showAnotherWindow ^= true;
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
-                    1000.0 / Double(ImGui::GetIO().Framerate), Double(ImGui::GetIO().Framerate));
+        _mesh.setCount(3)
+                .addVertexBuffer(std::move(buffer), 0,
+                                 Shaders::VertexColor2D::Position{},
+                                 Shaders::VertexColor2D::Color3{});
     }
 
+    void BaseApplication::drawEvent() {
+        GL::defaultFramebuffer.clear(GL::FramebufferClear::Color | GL::FramebufferClear::Depth);
 
-    /* 2. Show another simple window, now using an explicit Begin/End pair */
-    if (_showAnotherWindow) {
-        ImGui::SetNextWindowSize(ImVec2(500, 100), ImGuiCond_FirstUseEver);
-        ImGui::Begin("Another Window", &_showAnotherWindow);
-        ImGui::Text("Hello");
-        ImGui::End();
+        _imgui.newFrame();
+
+        /* Enable text input, if needed */
+        if (ImGui::GetIO().WantTextInput && !isTextInputActive())
+            startTextInput();
+        else if (!ImGui::GetIO().WantTextInput && isTextInputActive())
+            stopTextInput();
+
+        /* 1. Show a simple window.
+   Tip: if we don't call ImGui::Begin()/ImGui::End() the widgets appear in
+   a window called "Debug" automatically */
+        {
+            ImGui::Text("Hello, world!");
+            ImGui::SliderFloat("Float", &_floatValue, 0.0f, 1.0f);
+            if (ImGui::ColorEdit3("Clear Color", _clearColor.data()))
+                GL::Renderer::setClearColor(_clearColor);
+            if (ImGui::Button("Test Window"))
+                _showDemoWindow ^= true;
+            if (ImGui::Button("Another Window"))
+                _showAnotherWindow ^= true;
+            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
+                        1000.0 / Double(ImGui::GetIO().Framerate), Double(ImGui::GetIO().Framerate));
+        }
+
+
+        /* 2. Show another simple window, now using an explicit Begin/End pair */
+        if (_showAnotherWindow) {
+            ImGui::SetNextWindowSize(ImVec2(500, 100), ImGuiCond_FirstUseEver);
+            ImGui::Begin("Another Window", &_showAnotherWindow);
+            ImGui::Text("Hello");
+            ImGui::End();
+        }
+
+        /* 3. Show the ImGui demo window. Most of the sample code is in
+   ImGui::ShowDemoWindow() */
+        if (_showDemoWindow) {
+            ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
+            ImGui::ShowDemoWindow();
+        }
+
+        /* Update application cursor */
+        _imgui.updateApplicationCursor(*this);
+
+        /* Set appropriate states. If you only draw ImGui, it is sufficient to
+   just enable blending and scissor test in the constructor. */
+        GL::Renderer::enable(GL::Renderer::Feature::Blending);
+        GL::Renderer::enable(GL::Renderer::Feature::ScissorTest);
+        GL::Renderer::disable(GL::Renderer::Feature::FaceCulling);
+        GL::Renderer::disable(GL::Renderer::Feature::DepthTest);
+
+        _shader.draw(_mesh);
+        _imgui.drawFrame();
+
+        /* Reset state. Only needed if you want to draw something else with
+   different state after. */
+        GL::Renderer::enable(GL::Renderer::Feature::DepthTest);
+        GL::Renderer::enable(GL::Renderer::Feature::FaceCulling);
+        GL::Renderer::disable(GL::Renderer::Feature::ScissorTest);
+        GL::Renderer::disable(GL::Renderer::Feature::Blending);
+
+
+        swapBuffers();
+        redraw();
     }
 
-    /* 3. Show the ImGui demo window. Most of the sample code is in
-       ImGui::ShowDemoWindow() */
-    if (_showDemoWindow) {
-        ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
-        ImGui::ShowDemoWindow();
+    void BaseApplication::viewportEvent(ViewportEvent& event) {
+        GL::defaultFramebuffer.setViewport({{}, event.framebufferSize()});
+
+        _imgui.relayout(Vector2{event.windowSize()} / event.dpiScaling(),
+                        event.windowSize(), event.framebufferSize());
     }
 
-    /* Update application cursor */
-    _imgui.updateApplicationCursor(*this);
-
-    /* Set appropriate states. If you only draw ImGui, it is sufficient to
-       just enable blending and scissor test in the constructor. */
-    GL::Renderer::enable(GL::Renderer::Feature::Blending);
-    GL::Renderer::enable(GL::Renderer::Feature::ScissorTest);
-    GL::Renderer::disable(GL::Renderer::Feature::FaceCulling);
-    GL::Renderer::disable(GL::Renderer::Feature::DepthTest);
-
-    _shader.draw(_mesh);
-    _imgui.drawFrame();
-
-    /* Reset state. Only needed if you want to draw something else with
-       different state after. */
-    GL::Renderer::enable(GL::Renderer::Feature::DepthTest);
-    GL::Renderer::enable(GL::Renderer::Feature::FaceCulling);
-    GL::Renderer::disable(GL::Renderer::Feature::ScissorTest);
-    GL::Renderer::disable(GL::Renderer::Feature::Blending);
-
-
-    swapBuffers();
-    redraw();
-}
-
-void BaseApplication::viewportEvent(ViewportEvent& event) {
-    GL::defaultFramebuffer.setViewport({{}, event.framebufferSize()});
-
-    _imgui.relayout(Vector2{event.windowSize()} / event.dpiScaling(),
-                    event.windowSize(), event.framebufferSize());
-}
-
-void BaseApplication::keyPressEvent(KeyEvent& event) {
-    if (_imgui.handleKeyPressEvent(event)) return;
-}
-
-void BaseApplication::keyReleaseEvent(KeyEvent& event) {
-    if (_imgui.handleKeyReleaseEvent(event)) return;
-}
-
-void BaseApplication::mousePressEvent(MouseEvent& event) {
-    if (_imgui.handleMousePressEvent(event)) return;
-}
-
-void BaseApplication::mouseReleaseEvent(MouseEvent& event) {
-    if (_imgui.handleMouseReleaseEvent(event)) return;
-}
-
-void BaseApplication::mouseMoveEvent(MouseMoveEvent& event) {
-    if (_imgui.handleMouseMoveEvent(event)) return;
-}
-
-void BaseApplication::mouseScrollEvent(MouseScrollEvent& event) {
-    if (_imgui.handleMouseScrollEvent(event)) {
-        /* Prevent scrolling the page */
-        event.setAccepted();
-        return;
+    void BaseApplication::keyPressEvent(KeyEvent& event) {
+        if (_imgui.handleKeyPressEvent(event)) return;
     }
-}
 
-void BaseApplication::textInputEvent(TextInputEvent& event) {
-    if (_imgui.handleTextInputEvent(event)) return;
+    void BaseApplication::keyReleaseEvent(KeyEvent& event) {
+        if (_imgui.handleKeyReleaseEvent(event)) return;
+    }
+
+    void BaseApplication::mousePressEvent(MouseEvent& event) {
+        if (_imgui.handleMousePressEvent(event)) return;
+    }
+
+    void BaseApplication::mouseReleaseEvent(MouseEvent& event) {
+        if (_imgui.handleMouseReleaseEvent(event)) return;
+    }
+
+    void BaseApplication::mouseMoveEvent(MouseMoveEvent& event) {
+        if (_imgui.handleMouseMoveEvent(event)) return;
+    }
+
+    void BaseApplication::mouseScrollEvent(MouseScrollEvent& event) {
+        if (_imgui.handleMouseScrollEvent(event)) {
+            /* Prevent scrolling the page */
+            event.setAccepted();
+            return;
+        }
+    }
+
+    void BaseApplication::textInputEvent(TextInputEvent& event) {
+        if (_imgui.handleTextInputEvent(event)) return;
+    }
 }
