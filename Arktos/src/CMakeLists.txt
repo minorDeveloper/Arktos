@@ -5,13 +5,15 @@ find_package(spdlog)
 
 set_directory_properties(PROPERTIES CORRADE_USE_PEDANTIC_FLAGS ON)
 
-set(HEADER_LIST 
+set(HEADER_LIST
+    "${Arktos_SOURCE_DIR}/include/Arktos.h"
     "${Arktos_SOURCE_DIR}/include/Arktos/Core.h"
     "${Arktos_SOURCE_DIR}/include/Arktos/Log.h"
     "${Arktos_SOURCE_DIR}/include/Arktos/Physics/Nbody.h"
     "${Arktos_SOURCE_DIR}/include/Arktos/Maths/Vec.h")
 
 set(SOURCE_LIST
+    "${Arktos_SOURCE_DIR}/src/Arktos.cpp"
     "${Arktos_SOURCE_DIR}/src/Arktos/Log.cpp"
     "${Arktos_SOURCE_DIR}/src/Arktos/Physics/Nbody.cpp"
     "${Arktos_SOURCE_DIR}/src/Arktos/Physics/System.cpp"
@@ -21,8 +23,8 @@ add_library(Arktos_Lib STATIC ${HEADER_LIST} ${SOURCE_LIST})
 
 target_include_directories(
         Arktos_Lib
-        PRIVATE ${EXTERNALS_DIR}
-        PRIVATE ${LUA_DIR}
+        PUBLIC ${EXTERNALS_DIR}
+        PUBLIC ${LUA_DIR}
 )
 
 target_include_directories(Arktos_Lib PUBLIC ../include)

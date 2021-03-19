@@ -1,51 +1,8 @@
-
-#include <Magnum/GL/Buffer.h>
-#include <Magnum/GL/DefaultFramebuffer.h>
-#include <Magnum/GL/Mesh.h>
-#include <Magnum/GL/Renderer.h>
-#include <Magnum/ImGuiIntegration/Context.hpp>
-#include <Magnum/Math/Color.h>
-#include <Magnum/Platform/Sdl2Application.h>
-#include <Magnum/Shaders/VertexColor.h>
-
-#include "Arktos/Log.h"
-
-#define SOL_ALL_SAFETIES_ON 1
-#include <lua/lua.hpp>
-#include <sol/sol.hpp>
-
+#include "Arktos.h"
 
 using namespace Magnum;
 using namespace Math::Literals;
 
-class BaseApplication : public Platform::Application {
-public:
-    explicit BaseApplication(const Arguments& arguments);
-
-    void drawEvent() override;
-
-    void viewportEvent(ViewportEvent& event) override;
-
-    void keyPressEvent(KeyEvent& event) override;
-    void keyReleaseEvent(KeyEvent& event) override;
-
-    void mousePressEvent(MouseEvent& event) override;
-    void mouseReleaseEvent(MouseEvent& event) override;
-    void mouseMoveEvent(MouseMoveEvent& event) override;
-    void mouseScrollEvent(MouseScrollEvent& event) override;
-    void textInputEvent(TextInputEvent& event) override;
-
-private:
-    ImGuiIntegration::Context _imgui{NoCreate};
-
-    bool _showDemoWindow = true;
-    bool _showAnotherWindow = false;
-    Color4 _clearColor = 0x72909aff_rgbaf;
-    Float _floatValue = 0.0f;
-
-    GL::Mesh _mesh;
-    Shaders::VertexColor2D _shader;
-};
 
 BaseApplication::BaseApplication(const Arguments& arguments) : Platform::Application{arguments, Configuration{}.setTitle("Magnum Triangle Example").setWindowFlags(Configuration::WindowFlag::Resizable)} {
     using namespace Math::Literals;
@@ -187,5 +144,3 @@ void BaseApplication::mouseScrollEvent(MouseScrollEvent& event) {
 void BaseApplication::textInputEvent(TextInputEvent& event) {
     if (_imgui.handleTextInputEvent(event)) return;
 }
-
-MAGNUM_APPLICATION_MAIN(BaseApplication)

@@ -1,10 +1,6 @@
 
-#include <iostream>
 
-#include "Arktos/Log.h"
+#include "Arktos.h"
+#include <Magnum/Platform/Sdl2Application.h>
 
-int main() {
-    Arktos::Log::Init();
-    std::cout << "Hello everybody!" << std::endl;
-    return 0;
-}
+MAGNUM_APPLICATION_MAIN(BaseApplication)

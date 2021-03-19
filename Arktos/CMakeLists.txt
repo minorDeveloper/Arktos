@@ -103,5 +103,6 @@ add_subdirectory(apps)
 # Emergency override ARKTOS_BUILD_TESTING)provided as well
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR ARKTOS_BUILD_TESTING)
    AND BUILD_TESTING)
+    message("Testing enabled")
   add_subdirectory(tests)
 endif()
