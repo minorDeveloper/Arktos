@@ -9,9 +9,6 @@ namespace Arktos {
 
         Arktos::Log::Init();
 
-        CORE_TRACE("Hello this is the core logger");
-        CORE_WARN("Hello this is a warning");
-
         _imgui = ImGuiIntegration::Context(Vector2{windowSize()} / dpiScaling(),
                                            windowSize(), framebufferSize());
 

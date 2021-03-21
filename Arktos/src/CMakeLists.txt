@@ -40,4 +40,4 @@ target_link_libraries(Arktos_Lib PUBLIC
     lua)
 
 
-target_compile_features(Arktos_Lib PRIVATE cxx_std_17)
+target_compile_features(Arktos_Lib PUBLIC cxx_std_17)
