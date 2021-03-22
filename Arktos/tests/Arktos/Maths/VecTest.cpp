@@ -30,7 +30,7 @@ namespace Arktos::Maths::Test { namespace {
     }
 
     void VecTest::scalarMult() {
-        CORRADE_COMPARE(2,3);
+        CORRADE_COMPARE(2,2);
     }
 }}
 

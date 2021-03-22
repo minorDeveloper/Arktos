@@ -51,8 +51,10 @@ jobs:
       - name: Build
         run: |
           cmake --build "${{ env.CMAKE_BUILD_DIR }}" --config Debug --target Arktos
-      - name: Show content of workspace at its completion
-        run: find $RUNNER_WORKSPACE
-        shell: bash
+      
+      -name: Test
+        run: |
+            cd build
+            ctest -C Debug --verbose
         
         
