@@ -5,7 +5,7 @@ on: [push]
 
 jobs:
   job:
-    name: ${{ matrix.os }}-hosted-pure
+    name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -43,6 +43,12 @@ jobs:
           sudo apt install libsdl2-dev
         shell: bash
         if: matrix.os == 'ubuntu-latest'
+        
+      - name: Get SDL from Brew
+        run: |
+          brew install sdl2
+        shell: bash
+        if: matrix.os == 'macos-latest'
       
       # Run CMake to generate Ninja project files, using the vcpkg's toolchain file to resolve and install the dependencies as specified in vcpkg.json.
       - name: Generate project files
