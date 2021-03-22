@@ -39,6 +39,7 @@ jobs:
       
       - name: Get SDL from package manager
         run: |
+          sudo apt-get update
           sudo apt install libsdl2-dev
         shell: bash
         if: matrix.os == 'ubuntu-latest'
