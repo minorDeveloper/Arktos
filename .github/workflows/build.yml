@@ -56,7 +56,7 @@ jobs:
         shell: bash
         
       - name: Test
-        working-directory: ./app
+        working-directory: ./build
         run: |
             ctest -C Debug --verbose
         shell: bash
