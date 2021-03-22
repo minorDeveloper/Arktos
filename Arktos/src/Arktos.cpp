@@ -9,6 +9,8 @@ namespace Arktos {
 
         Arktos::Log::Init();
 
+        CORE_INFO("Hello this is info");
+
         _imgui = ImGuiIntegration::Context(Vector2{windowSize()} / dpiScaling(),
                                            windowSize(), framebufferSize());
 

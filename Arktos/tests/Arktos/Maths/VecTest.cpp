@@ -1,10 +1,10 @@
 
 #include <Corrade/TestSuite/Tester.h>
-#include <Corrade/Utility/DebugStl.h>
 
 #include <Arktos/Maths/Vec.h>
+#include <Arktos/Log.h>
 
-namespace Test { namespace {
+namespace Arktos::Maths::Test { namespace {
     struct VecTest: Corrade::TestSuite::Tester {
         explicit VecTest();
 
@@ -17,12 +17,10 @@ namespace Test { namespace {
         addTests({&VecTest::addition,
                   &VecTest::scalarMult,
                   &VecTest::dot});
-
     }
 
     void VecTest::addition() {
         Arktos::Maths::Vec<double> vector;
-
         CORRADE_COMPARE(2,2);
     }
 
@@ -36,4 +34,4 @@ namespace Test { namespace {
     }
 }}
 
-CORRADE_TEST_MAIN(Test::VecTest)
+CORRADE_TEST_MAIN(Arktos::Maths::Test::VecTest)
