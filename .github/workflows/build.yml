@@ -40,7 +40,9 @@ jobs:
       # Make the build directory
       - name: Make build directory
         run: |
-          mkdir build && cd build
+          mkdir build
+          cd build
+          dir
       
       # Run CMake to generate Ninja project files, using the vcpkg's toolchain file to resolve and install the dependencies as specified in vcpkg.json.
       - name: Generate project files
