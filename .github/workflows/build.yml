@@ -45,7 +45,7 @@ jobs:
       # Run CMake to generate Ninja project files, using the vcpkg's toolchain file to resolve and install the dependencies as specified in vcpkg.json.
       - name: Generate project files
         run: |
-          cmake build "${{ env.CMAKE_SOURCE_DIR }}"
+          cmake build -S "${{ env.CMAKE_SOURCE_DIR }}" -B "${{ env.CMAKE_BUILD_DIR }}"
           
       - name: Show content of workspace after the project files have been generated
         run: find $RUNNER_WORKSPACE
@@ -54,7 +54,7 @@ jobs:
       # Build the whole project.
       - name: Build
         run: |
-          cmake --build "${{ env.CMAKE_BUILD_DIR }}"
+          cmake --build "${{ env.CMAKE_BUILD_DIR }}" --config Debug --target Arktos
       - name: Show content of workspace at its completion
         run: find $RUNNER_WORKSPACE
         shell: bash
