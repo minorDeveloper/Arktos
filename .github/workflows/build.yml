@@ -46,6 +46,10 @@ jobs:
       - name: Generate project files
         run: |
           cmake build "${{ env.CMAKE_SOURCE_DIR }}"
+          
+      - name: Show content of workspace after the project files have been generated
+        run: find $RUNNER_WORKSPACE
+        shell: bash
       
       # Build the whole project.
       - name: Build
