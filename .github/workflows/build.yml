@@ -46,7 +46,7 @@ jobs:
         run: |
           sudo apt install libsdl2-dev
         shell: bash
-        if: matrix.os == "ubuntu-latest"
+        if: matrix.os == 'ubuntu-latest'
 
       # Build the whole project.
       - name: Build
