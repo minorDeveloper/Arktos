@@ -49,3 +49,7 @@
 /cmake-build-release
 /cmake-build-minsizerel
 /cmake-build-relwithdebinfo
+
+# But include SDL2 because it isn't a submodule
+!*/Arktos/extern/SDL2-2.0.10-vs
+!*/Arktos/extern/SDL2-2.0.10-mingw
