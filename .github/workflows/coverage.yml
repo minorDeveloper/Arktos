@@ -1,0 +1,76 @@
+
+# Generate code coverage report and upload to coveralls
+name: Arktos-Coverage
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
+
+jobs:
+  job:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        include:
+          - os: ubuntu-latest
+            triplet: x64-linux
+    env:
+      # Indicates the CMake build directory where project files and binaries are being produced.
+      CMAKE_SOURCE_DIR: ${{ github.workspace }}/
+      CMAKE_BUILD_DIR: ${{ github.workspace }}/build
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      # Setup the build machine with the most recent versions of CMake and Ninja. Both are cached if not already: on subsequent runs both will be quickly restored from GitHub cache service.
+      - uses: lukka/get-cmake@latest
+      - name: Show content of workspace after cache has been restored
+        run: find $RUNNER_WORKSPACE
+        shell: bash
+        
+      # On Windows runners, let's ensure to have the Developer Command Prompt environment setup correctly. As used here the Developer Command Prompt created is targeting x64 and using the default the Windows SDK.
+      - uses: ilammy/msvc-dev-cmd@v1
+      
+      - name: Get SDL from package manager
+        run: |
+          sudo apt-get update
+          sudo apt install libsdl2-dev
+        shell: bash
+      
+      # Run CMake
+      - name: Generate project files
+        run: |
+          cmake build -S "${{ env.CMAKE_SOURCE_DIR }}" -B "${{ env.CMAKE_BUILD_DIR }}" -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug
+          
+
+      # Build the whole project.
+      - name: Build
+        run: |
+          make
+          
+      # Generate the coverage report
+      - name: Coverage
+        run: |
+          make coveralls
+          
+      - name: Show content of workspace at its completion
+        run: find $RUNNER_WORKSPACE
+        shell: bash
+        
+      # Upload code coverage report
+      - name: Upload to Coveralls
+        run: |
+          curl -S -F json_file=@./build/Arktos/coveralls.json https://coveralls.io/api/v1/jobs
+       
+        
+        
+        
+        
