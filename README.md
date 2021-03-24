@@ -37,7 +37,7 @@ cd Arktos
 
 ### Installing dependencies
 
-#### Linux
+#### Linux (Ubuntu)
 
 ```
 sudo apt-get upgrade
@@ -52,7 +52,7 @@ brew install sdl2
 
 #### Windows
 
-SDL for windows is bundled with Arktos, no additional steps necessary.
+SDL for windows is bundled with Arktos, no additional steps are necessary.
 
 ### Build project
 
