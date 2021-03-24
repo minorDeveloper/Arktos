@@ -60,9 +60,6 @@ jobs:
         run: |
           make coveralls
           
-      - name: Show content of workspace at its completion
-        run: find $RUNNER_WORKSPACE
-        shell: bash
         
       # Upload code coverage report
       - name: Upload to Coveralls
