@@ -47,23 +47,16 @@ jobs:
         run: |
           cmake build -S "${{ env.CMAKE_SOURCE_DIR }}" -B "${{ env.CMAKE_BUILD_DIR }}" -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug
           
-      
-      - name: Show content of workspace at its completion
-        run: find $RUNNER_WORKSPACE
-        shell: bash
-          
 
       # Build the whole project.
       - name: Build
+        working-directory: ./build
         run: |
           make
           
-      - name: Show content of workspace at its completion
-        run: find $RUNNER_WORKSPACE
-        shell: bash
-          
       # Generate the coverage report
       - name: Coverage
+        working-directory: ./build
         run: |
           make coveralls
           
