@@ -43,6 +43,5 @@ target_compile_features(Arktos_Lib PUBLIC cxx_std_17)
 
 if (COVERALLS)
     set(COVERAGE_SRC ${SOURCE_LIST})
-
     coveralls_setup("${COVERAGE_SRC}" ON)
 endif()
