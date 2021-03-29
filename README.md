@@ -73,7 +73,7 @@ ctest -C Debug --verbose
 TODO
 
 ## Development and contributing
-I welcome pull requests and will take a look at any issues raised. If you want to see where the development of Arktos is headed then take a look at the [projects](https://github.com/minorDeveloper/Arktos/projects) page.
+I welcome pull requests and will take a look at any [issues](https://github.com/minorDeveloper/Arktos/issues/new/choose) raised. If you want to see where the development of Arktos is headed then take a look at the [projects](https://github.com/minorDeveloper/Arktos/projects) page.
 
 ## Acknowledgments
 

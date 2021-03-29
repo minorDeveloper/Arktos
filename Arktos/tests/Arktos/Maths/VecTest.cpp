@@ -7,7 +7,6 @@
 #include <Magnum/Math/TypeTraits.h>
 
 #include <Arktos/Maths/Vec.h>
-#include <Arktos/Log.h>
 
 using namespace Arktos::Maths;
 

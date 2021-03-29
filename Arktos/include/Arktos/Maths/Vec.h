@@ -19,19 +19,19 @@ namespace Arktos::Maths {
     public:
         constexpr Vec() noexcept: _elements{} {} // Default constructor, size of size
 
-        constexpr Vec(size_t size) noexcept: _elements(size, 0) {}
+        constexpr explicit Vec(size_t size) noexcept: _elements(size, 0) {}
 
-        constexpr Vec(size_t size, T val) noexcept: _elements(size, val) {}// Constructor with all elements at one value
+        constexpr Vec(size_t size, T val) noexcept: _elements(size, val) {} // Constructor with all elements at one value
 
-        constexpr Vec(T* data, size_t arraySize) noexcept: _elements{data, data + arraySize} {}// Constructor using an array
+        constexpr Vec(T* data, size_t arraySize) noexcept: _elements{data, data + arraySize} {} // Constructor using an array
 
-        constexpr Vec(std::vector<T>* other) noexcept: _elements{other->begin(), other->end()} {}// TODO see if this is actually better for large vectors
+        constexpr explicit Vec(std::vector<T>* other) noexcept: _elements{other->begin(), other->end()} {} // TODO see if this is actually better for large vectors
 
         template<class ...U> constexpr Vec(T first, U... next) noexcept: _elements{first, next...} {} // TODO Component wise
 
         //template<class U> constexpr explicit Vec(const Vec<U>& other) noexcept: {} // TODO From a vector of a different type
 
-        constexpr Vec(const Vec<T>&) noexcept = default;// Copy constructor
+        //constexpr Vec(const Vec<T>&) noexcept = default; // Copy constructor
 
         T& operator[](std::size_t _pos) {
             assert(_pos < _elements.size());
@@ -47,7 +47,6 @@ namespace Arktos::Maths {
             assert(_pos < _elements.size());
             _elements[_pos] = _val;
         }// Set value
-
 
         // -- Operator overloading
 
@@ -67,7 +66,6 @@ namespace Arktos::Maths {
 
             return true;
         }
-
 
         bool operator!=(const Vec<T>& other) const {
             return !operator==(other);
@@ -127,7 +125,7 @@ namespace Arktos::Maths {
         } // +=
 
         Vec<T> operator+ (const Vec<T>& other) const {
-            return Vec(*this) += other;
+            return Vec<T>(*this) += other;
         } // +
 
         Vec<T>& operator-=(const Vec<T>& other) {
@@ -140,7 +138,7 @@ namespace Arktos::Maths {
         } // -=
 
         Vec<T> operator- (const Vec<T>& other) const {
-            return Vec(*this) -= other;
+            return Vec<T>(*this) -= other;
         } // -
 
         Vec<T>& operator*=(T scalar) {
@@ -151,7 +149,7 @@ namespace Arktos::Maths {
         } // *= (scalar)
 
         Vec<T> operator* (T scalar) const {
-            return Vec(*this) *= scalar;
+            return Vec<T>(*this) *= scalar;
         } // * (scalar)
 
         Vec<T>& operator*=(const Vec<T>& other) {
@@ -164,7 +162,7 @@ namespace Arktos::Maths {
         } // *= (vector - components wise)
 
         Vec<T> operator* (const Vec<T>& other) const {
-            return Vec(*this) *= other;
+            return Vec<T>(*this) *= other;
         } // * (vector - components wise)
 
         Vec<T>& operator/=(const T scalar) {
@@ -175,7 +173,7 @@ namespace Arktos::Maths {
         } // /= (scalar)
 
         Vec<T> operator/ (const T scalar) {
-            return Vec(*this) /= scalar;
+            return Vec<T>(*this) /= scalar;
         } // / (scalar)
 
         Vec<T>& operator/=(const Vec<T>& other) {
@@ -188,7 +186,7 @@ namespace Arktos::Maths {
         } // /= (vector - components wise)
 
         Vec<T> operator/ (const Vec<T>& other) {
-            return Vec(*this) /= other;
+            return Vec<T>(*this) /= other;
         } // / (vector - components wise)
 
         // -- Checks
