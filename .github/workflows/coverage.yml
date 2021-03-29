@@ -24,6 +24,7 @@ jobs:
       CMAKE_SOURCE_DIR: ${{ github.workspace }}/
       CMAKE_BUILD_DIR: ${{ github.workspace }}/build
       COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      GIT_JOB_ID: ${{ github.job }}
 
     steps:
       - uses: actions/checkout@v2
