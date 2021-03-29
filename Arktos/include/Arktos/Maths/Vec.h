@@ -127,7 +127,7 @@ namespace Arktos::Maths {
         } // +=
 
         Vec<T> operator+ (const Vec<T>& other) const {
-            return Vec<T>(*this) += other;
+            return Vec(*this) += other;
         } // +
 
         Vec<T>& operator-=(const Vec<T>& other) {
@@ -140,7 +140,7 @@ namespace Arktos::Maths {
         } // -=
 
         Vec<T> operator- (const Vec<T>& other) const {
-            return Vec<T>(*this) -= other;
+            return Vec(*this) -= other;
         } // -
 
         Vec<T>& operator*=(T scalar) {
@@ -151,7 +151,7 @@ namespace Arktos::Maths {
         } // *= (scalar)
 
         Vec<T> operator* (T scalar) const {
-            return Vec<T>(*this) *= scalar;
+            return Vec(*this) *= scalar;
         } // * (scalar)
 
         Vec<T>& operator*=(const Vec<T>& other) {
@@ -164,7 +164,7 @@ namespace Arktos::Maths {
         } // *= (vector - components wise)
 
         Vec<T> operator* (const Vec<T>& other) const {
-            return Vec<T>(*this) *= other;
+            return Vec(*this) *= other;
         } // * (vector - components wise)
 
         Vec<T>& operator/=(const T scalar) {
@@ -175,7 +175,7 @@ namespace Arktos::Maths {
         } // /= (scalar)
 
         Vec<T> operator/ (const T scalar) {
-            return Vec<T>(*this) /= scalar;
+            return Vec(*this) /= scalar;
         } // / (scalar)
 
         Vec<T>& operator/=(const Vec<T>& other) {
@@ -188,7 +188,7 @@ namespace Arktos::Maths {
         } // /= (vector - components wise)
 
         Vec<T> operator/ (const Vec<T>& other) {
-            return Vec<T>(*this) /= other;
+            return Vec(*this) /= other;
         } // / (vector - components wise)
 
         // -- Checks
