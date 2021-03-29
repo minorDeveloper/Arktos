@@ -79,8 +79,6 @@ I welcome pull requests and will take a look at any [issues](https://github.com/
 
 
 ![Arktos_Small@0.5x](./media/Arktos_Small@0.5x.jpg)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FminorDeveloper%2FArktos.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FminorDeveloper%2FArktos?ref=badge_shield)
-
 
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FminorDeveloper%2FArktos.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FminorDeveloper%2FArktos?ref=badge_large)
