@@ -3,6 +3,8 @@ codecov:
   
 ignore:
   - "Arktos/extern"
+  - "Arktos/apps"
+  - "Arktos/src/Arktos.cpp"
 
 coverage:
   precision: 2
