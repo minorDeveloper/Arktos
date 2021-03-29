@@ -3,7 +3,7 @@
 Arktos
 &middot;
 [![Build Status](https://img.shields.io/github/workflow/status/minorDeveloper/Arktos/Arktos-Build)](https://github.com/minorDeveloper/Arktos/actions/workflows/build.yml)
-[![Coveralls](https://img.shields.io/coveralls/github/minorDeveloper/Arktos)](https://coveralls.io/github/minorDeveloper/Arktos)
+[![codecov](https://codecov.io/gh/minorDeveloper/Arktos/branch/main/graph/badge.svg?token=14O14P33Z6)](https://codecov.io/gh/minorDeveloper/Arktos)
 =====
 
 Arktos is an Orbital Manoever Engine for the simulation and optimization of spacecraft trajectories in an n-body system. The project is primarily written in C++ with CUDA kernels available for increased performance.
