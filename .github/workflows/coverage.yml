@@ -65,7 +65,7 @@ jobs:
       # Upload code coverage report
       - name: Upload to Coveralls
         run: |
-          curl -S -F json_file=@./build/Arktos/coveralls.json https://coveralls.io/api/v1/jobs
+          bash <(curl -s https://codecov.io/bash)
        
         
         
