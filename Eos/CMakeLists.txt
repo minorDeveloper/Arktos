@@ -34,7 +34,6 @@ add_subdirectory(src)
 # Final application is here
 add_subdirectory(apps)
 
-
 # Testing only available if this is the main app
 # Emergency override ARKTOS_BUILD_TESTING)provided as well
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR ARKTOS_BUILD_TESTING)
