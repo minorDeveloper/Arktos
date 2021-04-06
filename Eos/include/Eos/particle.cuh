@@ -5,8 +5,7 @@
 #ifndef CUDA_PARTICLE_H
 #define CUDA_PARTICLE_H
 
-#include "Eos/v3.cuh"
-
+#include "v3.cuh"
 
 class particle {
 public:

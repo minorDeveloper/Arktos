@@ -10,28 +10,22 @@ set(SOURCE_LIST
 
 add_library(Eos_Lib STATIC ${HEADER_LIST} ${SOURCE_LIST})
 
+target_compile_features(Eos_Lib PUBLIC cxx_std_11)
 
-set_target_properties(
-        Eos_Lib
-        PROPERTIES
-        CUDA_SEPARABLE_COMPILATION ON
-)
+set_target_properties(Eos_Lib PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
 
-set_target_properties(
-        Eos_Lib
-        PROPERTIES
-        CUDA_RESOLVE_DEVICE_SYMBOLS ON
-)
+#set_target_properties(Eos_Lib PROPERTIES CUDA_RESOLVE_DEVICE_SYMBOLS ON)
 
-set_target_properties(
-        Eos_Lib
-        PROPERTIES
-        POSITION_INDEPENDENT_CODE ON
-)
+#set_target_properties(Eos_Lib PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 target_include_directories(Eos_Lib PUBLIC ../include)
 
-target_compile_features(Eos_Lib PUBLIC cxx_std_17 cuda_std_11)
+
+
+add_executable(Eos main.cu)
+
+set_target_properties(Eos PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
+target_link_libraries(Eos PRIVATE library)
 
 if (COVERALLS)
     set(COVERAGE_SRC ${SOURCE_LIST} ${HEADER_LIST})
