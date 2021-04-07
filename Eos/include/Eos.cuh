@@ -1,5 +1,5 @@
 //
-// Created by samlane321 on 02/04/2021.
+// Created by samlane321 on 07/04/2021.
 //
 
 #ifndef ARKTOS_EOS_CUH

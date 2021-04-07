@@ -7,6 +7,7 @@ project(Eos
         DESCRIPTION "CUDA Computational Back-end"
         LANGUAGES CXX CUDA)
 
+
 set(CMAKE_CUDA_STANDARD 14)
 
 # Only do these if this is the main project, and not if it is included through add_subdirectory
@@ -34,13 +35,12 @@ set(MSVC2019_COMPATIBILITY ON)
 add_subdirectory(src)
 
 # Final application is here
-#add_subdirectory(apps)
+add_subdirectory(apps)
 
 # Testing only available if this is the main app
 # Emergency override ARKTOS_BUILD_TESTING)provided as well
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR ARKTOS_BUILD_TESTING)
         AND BUILD_TESTING)
     message("Testing enabled")
-    add_subdirectory(tests)
+    #add_subdirectory(tests)
 endif()
-

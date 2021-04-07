@@ -1,11 +1,12 @@
 //
-// Created by samlane321 on 30/03/2021.
+// Created by samlane321 on 03/04/2021.
 //
 
-#ifndef CUDA_PARTICLE_H
-#define CUDA_PARTICLE_H
+#ifndef CUDA_LIB_PARTICLE_CUH
+#define CUDA_LIB_PARTICLE_CUH
 
-#include "v3.cuh"
+
+#include "Eos/v3.cuh"
 
 class particle {
 public:
@@ -20,4 +21,4 @@ private:
 };
 
 
-#endif //CUDA_PARTICLE_H
+#endif //CUDA_LIB_PARTICLE_CUH

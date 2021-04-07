@@ -1,33 +1,20 @@
 
 set(HEADER_LIST
-        "${Eos_SOURCE_DIR}/include/Eos.cuh"
         "${Eos_SOURCE_DIR}/include/Eos/particle.cuh"
-        "${Eos_SOURCE_DIR}/include/Eos/v3.cuh")
+        "${Eos_SOURCE_DIR}/include/Eos/v3.cuh"
+        "${Eos_SOURCE_DIR}/include/Eos.cuh")
 
 set(SOURCE_LIST
         "${Eos_SOURCE_DIR}/src/Eos/particle.cu"
         "${Eos_SOURCE_DIR}/src/Eos/v3.cu")
 
-add_library(Eos_Lib STATIC ${HEADER_LIST} ${SOURCE_LIST})
+add_library(Eos_lib STATIC
+        ${HEADER_LIST} ${SOURCE_LIST}
+        )
 
-target_compile_features(Eos_Lib PUBLIC cxx_std_11)
+target_compile_features(Eos_lib PUBLIC cxx_std_11)
 
-set_target_properties(Eos_Lib PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
+set_target_properties(Eos_lib PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
 
-#set_target_properties(Eos_Lib PROPERTIES CUDA_RESOLVE_DEVICE_SYMBOLS ON)
+target_include_directories(Eos_lib PUBLIC ../include)
 
-#set_target_properties(Eos_Lib PROPERTIES POSITION_INDEPENDENT_CODE ON)
-
-target_include_directories(Eos_Lib PUBLIC ../include)
-
-
-
-add_executable(Eos main.cu)
-
-set_target_properties(Eos PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
-target_link_libraries(Eos PRIVATE library)
-
-if (COVERALLS)
-    set(COVERAGE_SRC ${SOURCE_LIST} ${HEADER_LIST})
-    coveralls_setup("${COVERAGE_SRC}" ON)
-endif()

@@ -1,9 +1,9 @@
 //
-// Created by samlane321 on 30/03/2021.
+// Created by samlane321 on 03/04/2021.
 //
 
-#ifndef CUDA_V3_H
-#define CUDA_V3_H
+#ifndef CUDA_LIB_V3_CUH
+#define CUDA_LIB_V3_CUH
 
 
 class v3 {
@@ -20,4 +20,4 @@ public:
 };
 
 
-#endif //CUDA_V3_H
+#endif //CUDA_LIB_V3_CUH

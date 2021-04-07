@@ -1,13 +1,6 @@
-
-
-
-//#include "Eos.cuh"
-
-#include <iostream>
+#include "Eos/particle.cuh"
 #include <stdlib.h>
 #include <stdio.h>
-
-#include "../include/Eos/particle.cuh"
 
 __global__
 void advanceParticles(float dt, particle * pArray, int nParticles)

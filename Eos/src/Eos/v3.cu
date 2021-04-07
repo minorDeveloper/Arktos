@@ -1,7 +1,3 @@
-//
-// Created by samlane321 on 30/03/2021.
-//
-
 #include "Eos/v3.cuh"
 #include <math.h>
 
