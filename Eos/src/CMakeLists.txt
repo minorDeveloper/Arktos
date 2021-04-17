@@ -18,3 +18,5 @@ set_target_properties(Eos_lib PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
 
 target_include_directories(Eos_lib PUBLIC ../include)
 
+target_compile_options(Eos_lib PUBLIC $<$<COMPILE_LANGUAGE:CUDA>:-gencode arch=compute_50,code=sm_50>)
+

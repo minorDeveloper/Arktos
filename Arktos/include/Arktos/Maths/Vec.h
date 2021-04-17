@@ -366,4 +366,5 @@ namespace Arktos::Maths {
         }
         return debug << Corrade::Utility::Debug::nospace << ")";
     }// debug output
+
 }// namespace Arktos::Maths

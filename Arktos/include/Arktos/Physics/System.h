@@ -1,20 +1,20 @@
 #pragma once
 
-#include <vector>
+#include "Arktos/Maths/Vec.h"
 
 namespace Arktos::Physics {
     template<class T>
     class System {
     private:
         T timestep;
-        std::vector<T> positionX, positionY, positionZ;
-        std::vector<T> velocityX, velocityY, velocityZ;
-        std::vector<T> accelX, accelY, accelZ;
-        const std::vector<T> mass;
+        Maths::Vec<T> positionX, positionY, positionZ;
+        Maths::Vec<T> velocityX, velocityY, velocityZ;
+        Maths::Vec<T> accelX, accelY, accelZ;
+        Maths::Vec<T> mass;
 
     public:
         ~System();
         System();
-        void addBody();
+        void pushBody();
     };
 }// namespace Arktos::Physics
