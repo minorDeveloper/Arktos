@@ -10,7 +10,9 @@ set(HEADER_LIST
     "${Arktos_SOURCE_DIR}/include/Arktos/Core.h"
     "${Arktos_SOURCE_DIR}/include/Arktos/Log.h"
     "${Arktos_SOURCE_DIR}/include/Arktos/Physics/Nbody.h"
-    "${Arktos_SOURCE_DIR}/include/Arktos/Maths/Vec.h")
+    "${Arktos_SOURCE_DIR}/include/Arktos/Maths/BaseVec.h"
+    "${Arktos_SOURCE_DIR}/include/Arktos/Maths/Vec.h"
+    "${Arktos_SOURCE_DIR}/include/Arktos/Maths/Vec3.h")
 
 set(SOURCE_LIST
     "${Arktos_SOURCE_DIR}/src/Arktos.cpp"

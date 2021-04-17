@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Arktos/Maths/Vec.h"
+#include "Arktos/Maths/Vec3.h"
 
 namespace Arktos::Physics {
     template<class T>
@@ -15,6 +16,16 @@ namespace Arktos::Physics {
     public:
         ~System();
         System();
-        void pushBody();
+        System(size_t bodies);
+
+        void pushBody(const Maths::Vec3<T>& position, const Maths::Vec3<T>& velocity, const T bodyMass);
+        void popBody(size_t bodyID);
+
+        Maths::Vec3<T> centreOfMass();
+        Maths::Vec3<T> centreOfVelocity();
+
+        T potentialEnergy();
+        T kineticEnergy();
+        T totalEnergy() { return potentialEnergy() + kineticEnergy(); }
     };
 }// namespace Arktos::Physics
