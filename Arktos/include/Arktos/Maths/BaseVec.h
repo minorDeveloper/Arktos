@@ -12,6 +12,9 @@
 #include <Magnum/Math/TypeTraits.h>
 #include <Corrade/Utility/Debug.h>
 
+// TODO: Document
+// TODO: Test
+
 namespace Arktos::Maths {
     template<class T> class BaseVec {
     public:
@@ -23,9 +26,9 @@ namespace Arktos::Maths {
 
         constexpr BaseVec(T* data, size_t arraySize) noexcept: _elements{data, data + arraySize} {} // Constructor using an array
 
-        constexpr explicit BaseVec(std::vector<T>* other) noexcept: _elements{other->begin(), other->end()} {} // TODO see if this is actually better for large vectors
+        constexpr explicit BaseVec(std::vector<T>* other) noexcept: _elements{other->begin(), other->end()} {}
 
-        template<class ...U> constexpr BaseVec(T first, U... next) noexcept: _elements{first, next...} {} // TODO Component wise
+        template<class ...U> constexpr BaseVec(T first, U... next) noexcept: _elements{first, next...} {}
 
         //template<class U> constexpr explicit Vec(const Vec<U>& other) noexcept: {} // TODO From a vector of a different type
 
@@ -192,7 +195,7 @@ namespace Arktos::Maths {
                     return false;
 
             return true;
-        }; // isZero TODO
+        }; // isZero
 
         bool isNormalised() const {
             return Magnum::Math::TypeTraits<T>::equals(length(), 1.0f);

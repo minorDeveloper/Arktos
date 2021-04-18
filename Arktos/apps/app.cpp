@@ -5,28 +5,27 @@
 #include <Magnum/Math/Vector.h>
 
 #include "Arktos/Maths/Vec.h"
+#include "Arktos/Physics/System.h"
+#include "Arktos/Physics/Constants.h"
 
-#include <iostream>
-#include <type_traits>
-#include <cstdint>
-
-using namespace Arktos::Maths;
+using namespace Arktos::Physics;
 
 int main() {
+    // Setup the system
+    SystemParameters parameters(TimeStep::Fixed, Integrator::Direct, OutputMode::Full);
+    System<Magnum::Double> system(size_t(2), parameters);
+    double timeStep = 24.0 * 3600.0 / 10.0;
+    system.setTimeStep(timeStep);
 
-    Magnum::Math::Vector<3, Magnum::Float> magVec;
+    // Maybe provide it with different physical constants
+    system.setStateVector(size_t(0), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Constants::Msol);
+    system.setStateVector(size_t(1), Constants::AU, 0.0, 0.0, 0.0, 29.78 * Constants::km, 0.0, Constants::Mearth);
+    system.toCoMoving();
 
+    // Tell it to iterate until a certain number of steps
+    system.advanceSteps(365.25 * 24.0 * 3600 / timeStep);
 
-    Vec<Magnum::Float> a = {1.0f, -2.0f, 3.0f, -4.0f};
-    Vec<Magnum::Float> b = {0.5f, 3.0f, 2.0f, -6.5f};
-    Vec<Magnum::Float> c = {1.5f, 1.0f, 5.0f, -10.5f};
-
-    Corrade::Utility::Debug{} << a << "this is a";
-    Corrade::Utility::Debug{} << b << "this is b";
-    a += b;
-    Corrade::Utility::Debug{} << a << "this is a now";
-    a = a + b;
-    Corrade::Utility::Debug{} << a << "this is a now";
+    Corrade::Utility::Debug{} << "test" << "this is a now";
 
     return 0;
 }

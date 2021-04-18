@@ -21,6 +21,16 @@ namespace Arktos::Maths {
 
         constexpr Vec3(const Vec3<T>& other) noexcept: Vec3<T>(other) {}
 
+        T& x() { return BaseVec<T>::_elements[0]; }
+        constexpr T x() const { return BaseVec<T>::_elements[0]; } /**< @overload */
+        void x(const T x) { BaseVec<T>::_elements[0] = x; }
 
+        T& y() { return BaseVec<T>::_elements[1]; }
+        constexpr T y() const { return BaseVec<T>::_elements[1]; } /**< @overload */
+        void y(const T y) { BaseVec<T>::_elements[1] = y; }
+
+        T& z() { return BaseVec<T>::_elements[2]; }
+        constexpr T z() const { return BaseVec<T>::_elements[2]; } /**< @overload */
+        void z(const T z) { BaseVec<T>::_elements[2] = z; }
     };
 } // namespace Arktos::Maths
