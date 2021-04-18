@@ -10,16 +10,19 @@ set(HEADER_LIST
     "${Arktos_SOURCE_DIR}/include/Arktos/Core.h"
     "${Arktos_SOURCE_DIR}/include/Arktos/Log.h"
     "${Arktos_SOURCE_DIR}/include/Arktos/Physics/Nbody.h"
+    "${Arktos_SOURCE_DIR}/include/Arktos/Physics/System.h"
+    "${Arktos_SOURCE_DIR}/include/Arktos/Physics/Constants.h"
     "${Arktos_SOURCE_DIR}/include/Arktos/Maths/BaseVec.h"
     "${Arktos_SOURCE_DIR}/include/Arktos/Maths/Vec.h"
-    "${Arktos_SOURCE_DIR}/include/Arktos/Maths/Vec3.h")
+    "${Arktos_SOURCE_DIR}/include/Arktos/Maths/Vec3.h" )
 
 set(SOURCE_LIST
     "${Arktos_SOURCE_DIR}/src/Arktos.cpp"
     "${Arktos_SOURCE_DIR}/src/Arktos/Log.cpp"
     "${Arktos_SOURCE_DIR}/src/Arktos/Physics/Nbody.cpp"
     "${Arktos_SOURCE_DIR}/src/Arktos/Physics/System.cpp"
-    "${Arktos_SOURCE_DIR}/src/Arktos/Maths/Vec.cpp")
+    "${Arktos_SOURCE_DIR}/src/Arktos/Physics/Constants.cpp"
+    "${Arktos_SOURCE_DIR}/src/Arktos/Maths/Vec.cpp" )
 
 add_library(Arktos_Lib STATIC ${HEADER_LIST} ${SOURCE_LIST})
 

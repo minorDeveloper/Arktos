@@ -291,7 +291,6 @@ namespace Arktos::Maths {
     };
 
 
-
     template<class T> inline BaseVec<T> operator*(typename std::common_type<T>::type scalar, const BaseVec<T>& vector) {
         return vector * scalar;
     }

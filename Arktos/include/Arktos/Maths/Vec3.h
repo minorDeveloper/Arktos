@@ -7,7 +7,7 @@
  */
 
 namespace Arktos::Maths {
-    template<class T> class Vec3 : public BaseVec {
+    template<class T> class Vec3 : public BaseVec<T> {
     public:
         constexpr Vec3() noexcept: BaseVec<T>(size_t(3)) {}
 
@@ -20,5 +20,7 @@ namespace Arktos::Maths {
         template<class U> constexpr explicit Vec3(const BaseVec<T>& other) noexcept: BaseVec<T>(other) {}
 
         constexpr Vec3(const Vec3<T>& other) noexcept: Vec3<T>(other) {}
+
+
     };
 } // namespace Arktos::Maths
