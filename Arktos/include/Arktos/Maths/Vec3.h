@@ -19,7 +19,7 @@ namespace Arktos::Maths {
 
         template<class U> constexpr explicit Vec3(const BaseVec<T>& other) noexcept: BaseVec<T>(other) {}
 
-        constexpr Vec3(const Vec3<T>& other) noexcept: Vec3<T>(other) {}
+        constexpr Vec3(const BaseVec<T>& other) noexcept: BaseVec<T>(other) {}
 
         T& x() { return BaseVec<T>::_elements[0]; }
         constexpr T x() const { return BaseVec<T>::_elements[0]; } /**< @overload */

@@ -14,7 +14,7 @@ int main() {
     // Setup the system
     SystemParameters parameters(TimeStep::Fixed, Integrator::Direct, OutputMode::Full);
     System<Magnum::Double> system(size_t(2), parameters);
-    double timeStep = 24.0 * 3600.0 / 10.0;
+    double timeStep = 24.0 * 3600.0 / 100.0;
     system.setTimeStep(timeStep);
 
     // Maybe provide it with different physical constants
@@ -23,7 +23,7 @@ int main() {
     system.toCoMoving();
 
     // Tell it to iterate until a certain number of steps
-    system.advanceSteps(365.25 * 24.0 * 3600 / timeStep);
+    system.advanceSteps(4.0 * 365.25 * 24.0 * 3600 / timeStep);
 
     Corrade::Utility::Debug{} << "test" << "this is a now";
 

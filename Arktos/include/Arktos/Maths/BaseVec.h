@@ -126,11 +126,24 @@ namespace Arktos::Maths {
             return BaseVec<T>(*this) += other;
         } // +
 
+        // TODO: Write tests for this
+        BaseVec<T>& operator+=(const T& other) {
+            for(std::size_t i = 0; i != _elements.size(); ++i)
+                _elements[i] += other._elements[i];
+
+            return *this;
+        }
+
+        // TODO: Write tests for this
+        BaseVec<T> operator+ (const T& other) {
+            return BaseVec<T>(*this) += other;
+        }
+
         BaseVec<T>& operator-=(const BaseVec<T>& other) {
             assert(_elements.size() == other._elements.size());
 
             for(std::size_t i = 0; i != _elements.size(); ++i)
-                _elements[i] -= other._elements[i];
+                _elements[i] -= other;
 
             return *this;
         } // -=
@@ -139,12 +152,26 @@ namespace Arktos::Maths {
             return BaseVec<T>(*this) -= other;
         } // -
 
+        // TODO: Write tests for this
+        BaseVec<T>& operator-=(const T& other) {
+            for(std::size_t i = 0; i != _elements.size(); ++i)
+                _elements[i] += other;
+
+            return *this;
+        }
+
+        // TODO: Write tests for this
+        BaseVec<T> operator- (const T& other) {
+            return BaseVec<T>(*this) += other;
+        }
+
         BaseVec<T>& operator*=(T scalar) {
             for (std::size_t i = 0; i != _elements.size(); ++i)
                 _elements[i] *= scalar;
 
             return *this;
         } // *= (scalar)
+
 
         BaseVec<T> operator* (T scalar) const {
             return BaseVec<T>(*this) *= scalar;

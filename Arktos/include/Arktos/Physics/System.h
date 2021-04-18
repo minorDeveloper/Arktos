@@ -223,16 +223,48 @@ namespace Arktos::Physics {
 
     template<class T>
     const Maths::Vec3<T> System<T>::centreOfMass() {
+        T massFraction;
+        Maths::Vec3<T> com;
+        Maths::Vec3<T> temp;
 
+        totalMass = 0;
+        for (size_t i = 0; i < bodies; i++) {
+            totalMass += mass[i];
+        }
+
+        for (size_t i = 0; i < bodies; i++) {
+            massFraction = mass[i] / totalMass;
+            temp = { positionX[i], positionY[i], positionZ[i] };
+            com += massFraction * temp;
+        }
+
+        return com;
     }
 
     template<class T>
     const Maths::Vec3<T> System<T>::centreOfVelocity() {
+        T massFraction;
+        Maths::Vec3<T> cov;
+        Maths::Vec3<T> temp;
 
+        // FixMe: The solution for keeping track of the total mass so we don't have to do this isn't working yet
+        totalMass = 0;
+        for (size_t i = 0; i < bodies; i++) {
+            totalMass += mass[i];
+        }
+
+        for (size_t i = 0; i < bodies; i++) {
+            massFraction = mass[i] / totalMass;
+            temp = { velocityX[i], velocityY[i], velocityZ[i] };
+            cov += massFraction * temp;
+        }
+
+        return cov;
     }
 
     template<class T>
     void System<T>::toCoMoving() {
+        // FixMe: Something about this isn't quite right yet. I'm not sure why.
         Maths::Vec3<T> com = centreOfMass();
         Maths::Vec3<T> cov = centreOfVelocity();
 
@@ -240,9 +272,9 @@ namespace Arktos::Physics {
         positionY -= com.y();
         positionZ -= com.z();
 
-        velocityX -= com.x();
-        velocityY -= com.y();
-        velocityZ -= com.z();
+        velocityX -= cov.x();
+        velocityY -= cov.y();
+        velocityZ -= cov.z();
     }
 
     template<class T>
