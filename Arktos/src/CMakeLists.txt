@@ -39,6 +39,8 @@ target_link_libraries(Arktos_Lib PUBLIC
     Magnum::Application
     Magnum::GL
     Magnum::Magnum
+    Magnum::MeshTools
+    Magnum::Primitives
     Magnum::Shaders
     MagnumIntegration::ImGui
     spdlog

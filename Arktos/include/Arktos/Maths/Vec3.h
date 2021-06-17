@@ -2,6 +2,9 @@
 
 #include "Arktos/Maths/BaseVec.h"
 
+// TODO: Document
+// TODO: Test
+
 /** @file
  * @brief Class @ref Arktos::Maths::Vec3
  */
@@ -20,6 +23,11 @@ namespace Arktos::Maths {
         template<class U> constexpr explicit Vec3(const BaseVec<T>& other) noexcept: BaseVec<T>(other) {}
 
         constexpr Vec3(const BaseVec<T>& other) noexcept: BaseVec<T>(other) {}
+
+        // TODO: Test this
+        Magnum::Math::Vector3<T> toVector3() {
+            return Magnum::Math::Vector3<T>(this->_elements.data());
+        }
 
         T& x() { return BaseVec<T>::_elements[0]; }
         constexpr T x() const { return BaseVec<T>::_elements[0]; } /**< @overload */

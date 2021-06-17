@@ -8,6 +8,9 @@
 #include "spdlog/sinks/stdout_color_sinks.h"
 #pragma warning(pop)
 
+// TODO: Document
+// TODO: Test
+
 namespace Arktos {
 
     class Log

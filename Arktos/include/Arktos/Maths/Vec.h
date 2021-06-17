@@ -6,6 +6,9 @@
 
 #include "Arktos/Maths/BaseVec.h"
 
+// TODO: Document
+// TODO: Test
+
 namespace Arktos::Maths {
     template<class T> class Vec : public BaseVec<T> {
     public:

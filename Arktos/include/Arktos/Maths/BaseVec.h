@@ -9,6 +9,7 @@
 #include <cassert>
 #include <type_traits>
 
+#include <Magnum/Math/Vector.h>
 #include <Magnum/Math/TypeTraits.h>
 #include <Corrade/Utility/Debug.h>
 
@@ -28,9 +29,12 @@ namespace Arktos::Maths {
 
         constexpr explicit BaseVec(std::vector<T>* other) noexcept: _elements{other->begin(), other->end()} {}
 
+        // TODO: Test this
+        template<size_t size> constexpr explicit BaseVec(Magnum::Math::Vector<size, T>& other) noexcept: BaseVec(other.data(), size) {};
+
         template<class ...U> constexpr BaseVec(T first, U... next) noexcept: _elements{first, next...} {}
 
-        //template<class U> constexpr explicit Vec(const Vec<U>& other) noexcept: {} // TODO From a vector of a different type
+        //template<class U> constexpr explicit Vec(const Vec<U>& other) noexcept: {} // TODO: From a vector of a different type
 
         T& operator[](std::size_t _pos) {
             assert(_pos < _elements.size());
@@ -46,6 +50,11 @@ namespace Arktos::Maths {
             assert(_pos < _elements.size());
             _elements[_pos] = _val;
         } // Set value
+
+        // TODO: Test this
+        template<size_t size> Magnum::Math::Vector<size, T> toVector() {
+            return Magnum::Math::Vector<_elements.size(), T>(_elements.data());
+        }
 
         // -- Operator overloading
 
@@ -228,7 +237,7 @@ namespace Arktos::Maths {
             return Magnum::Math::TypeTraits<T>::equals(length(), 1.0f);
         }; // isNormalised
 
-        // -- None of these mutate the vector - they return a new vector
+        // -- NONE of these mutate the vector - they return a new vector
 
         static T dot(const BaseVec<T>& a, const BaseVec<T>& b) {
             assert(a._elements.size() == b._elements.size());

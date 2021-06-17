@@ -15,7 +15,7 @@
 namespace Arktos::Physics {
     enum class TimeStep { Fixed, Variable };
     enum class Integrator { Direct, RK4 };
-    enum class OutputMode { None, StartEnd, Full};
+    enum class OutputMode { None, StartEnd, Full };
 
     struct SystemParameters{
         TimeStep   timeStep;
@@ -32,15 +32,15 @@ namespace Arktos::Physics {
         System() noexcept:  positionX{}, positionY{}, positionZ{},
                             velocityX{}, velocityY{}, velocityZ{},
                             accelX{}, accelY{}, accelZ{}, mass{},
-                            bodies{0}, timeStep{0}, time{0}, totalMass{0} { fileOutput.open("SystemFile.dat"); };
+                            bodies{0} { debugOutput.open("SystemFile.dat"); };
 
         System(const size_t bodies, const SystemParameters& systemParameters) noexcept:  positionX{bodies}, positionY{bodies}, positionZ{bodies},
                                                                         velocityX{bodies}, velocityY{bodies}, velocityZ{bodies},
                                                                         accelX{bodies}, accelY{bodies}, accelZ{bodies},
-                                                                        mass{bodies}, bodies{bodies}, timeStep{0}, time{0}, totalMass{0},
-                                                                        systemParameters{systemParameters} { fileOutput.open("SystemFile.dat"); };
+                                                                        mass{bodies}, bodies{bodies},
+                                                                        systemParameters{systemParameters} { debugOutput.open("SystemFile.dat"); };
 
-        ~System() { fileOutput.close(); };
+        ~System() { debugOutput.close(); };
         // Frame shifting
         const Maths::Vec3<T> centreOfMass();
         const Maths::Vec3<T> centreOfVelocity();
@@ -72,10 +72,10 @@ namespace Arktos::Physics {
             timeStep = timeStep_;
         }
     private:
-        std::ofstream fileOutput;
+        std::ofstream debugOutput;
         const SystemParameters systemParameters;
-        T timeStep;
-        T time;
+        T timeStep = (T)0;
+        T time = (T)0;
 
 
         size_t bodies;
@@ -130,6 +130,7 @@ namespace Arktos::Physics {
 
     template<class T>
     void System<T>::advanceUntilTime(double endTime) {
+        assert(endTime > time);
         // Calculate initial time-step
         updateTimestep();
 
@@ -162,11 +163,11 @@ namespace Arktos::Physics {
             case OutputMode::StartEnd:
                 break;
             case OutputMode::Full:
-                fileOutput << time << "    ";
+                debugOutput << time << "    ";
                 for (size_t i = 0; i < bodies; i++) {
-                    fileOutput << positionX[i] << "    " << positionY[i] << " ";
+                    debugOutput << positionX[i] << "    " << positionY[i] << " ";
                 }
-                fileOutput << std::endl;
+                debugOutput << std::endl;
                 break;
         }
 

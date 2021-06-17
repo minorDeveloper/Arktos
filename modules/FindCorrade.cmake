@@ -174,7 +174,7 @@
 # Depends on ``Corrade::rc``, which is part of Corrade utilities. This command
 # generates resource data using given configuration file in current build
 # directory. Argument name is name under which the resources can be explicitly
-# loaded. Variable ``<name>`` contains compiled resource filename, which is
+# loaded. VARIABLE ``<name>`` contains compiled resource filename, which is
 # then used for compiling library / executable. On CMake >= 3.1 the
 # `resources.conf` file can contain UTF-8-encoded filenames. Example usage::
 #

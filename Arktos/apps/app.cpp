@@ -1,5 +1,5 @@
 
-
+/*
 #include <Corrade/Utility/DebugStl.h>
 
 #include <Magnum/Math/Vector.h>
@@ -12,7 +12,7 @@ using namespace Arktos::Physics;
 
 int main() {
     // Setup the system
-    SystemParameters parameters(TimeStep::Fixed, Integrator::Direct, OutputMode::Full);
+    SystemParameters parameters(TimeStep::FIXED, Integrator::DIRECT, OutputMode::FULL);
     System<Magnum::Double> system(size_t(2), parameters);
     double timeStep = 24.0 * 3600.0 / 100.0;
     system.setTimeStep(timeStep);
@@ -29,7 +29,7 @@ int main() {
 
     return 0;
 }
+*/
 
-
-//#include "Arktos.h"
-//MAGNUM_APPLICATION_MAIN(Arktos::BaseApplication)
+#include "Arktos.h"
+MAGNUM_APPLICATION_MAIN(Arktos::BaseApplication)

@@ -1,5 +1,3 @@
-#include <sstream>
-#include <vector>
 
 #include <Corrade/TestSuite/Tester.h>
 #include <Corrade/Utility/DebugStl.h>
@@ -30,5 +28,4 @@ namespace Arktos::Maths::Test { namespace {
         CORRADE_COMPARE(a.y(), 2.0f);
     }
 }}
-
 CORRADE_TEST_MAIN(Arktos::Maths::Test::Vec3Test)
