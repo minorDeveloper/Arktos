@@ -16,16 +16,18 @@ if (COVERALLS)
     coveralls_turn_on_coverage()
 endif()
 
-
 include(CheckLanguage)
 check_language(CUDA)
 
 
 if (CMAKE_CUDA_COMPILER)
+    message("CUDA Found")
 	enable_language(CUDA)
 	add_definitions(-DCUDA_ENABLED=${CMAKE_CUDA_COMPILER})
     message("CUDA Found")
     add_subdirectory(Eos)
+else()
+    message("CUDA Missing")
 endif(CMAKE_CUDA_COMPILER)
 
 add_subdirectory(Arktos)
