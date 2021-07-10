@@ -63,7 +63,7 @@ namespace Arktos::Maths::Test { namespace {
 
         void eraseElement();
         void eraseElements();
-
+\
         void debug();
 
     };
@@ -106,7 +106,8 @@ namespace Arktos::Maths::Test { namespace {
                   &VecTest::appendVec,
                   &VecTest::eraseElement,
                   &VecTest::eraseElements,
-                  &VecTest::debug});
+                  &VecTest::debug
+        });
     }
     
     void Test::VecTest::construct() {

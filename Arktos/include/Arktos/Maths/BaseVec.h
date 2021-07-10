@@ -51,10 +51,11 @@ namespace Arktos::Maths {
             _elements[_pos] = _val;
         } // Set value
 
+        /*
         // TODO: Test this
-        template<size_t size> Magnum::Math::Vector<size, T> toVector() {
+        template<size_t size> Magnum::Math::Vector<_elements.size(), T> toVector() {
             return Magnum::Math::Vector<_elements.size(), T>(_elements.data());
-        }
+        }*/
 
         // -- Operator overloading
 
